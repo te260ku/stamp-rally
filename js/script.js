@@ -1,20 +1,15 @@
-const video  = document.querySelector('#js-video')
+const video  = document.querySelector('#player')
+
+let handleSuccess = function(stream) {
+    video.srcObject = stream;
+};
 
 navigator.mediaDevices
     .getUserMedia({
         audio: false,
-        video: {
-            facingMode: {
-                exact: 'environment'
-            }
-        }
+        video: {facingMode: "environment"},
     })
-    .then(function(stream) {
-        video.srcObject = stream
-        video.onloadedmetadata = function(e) {
-            video.play()
-        }
-    })
+    .then(handleSuccess)
     .catch(function(err) {
         alert('Error!!')
     })
