@@ -1,10 +1,35 @@
-const video  = document.querySelector('#player')
-const canvas = document.querySelector('#snapshot')
-const ctx = canvas.getContext('2d')
+const video = document.getElementById('player');
+const snapshotCanvas = document.getElementById('snapshot');
+const width = snapshotCanvas.width;
+const height = snapshotCanvas.height;
 
 let handleSuccess = function(stream) {
     video.srcObject = stream;
+
+    startScan((scanResult) => {
+        // このページの呼び出し元に読み取り結果を返す
+    });
 };
+
+
+let startScan = function(callback) {
+    const canvasContext = snapshotCanvas.getContext("2d");
+    // 500ms間隔でスナップショットを取得し、QRコードの読み取りを行う
+    let intervalHandler = setInterval(() => {
+      canvasContext.drawImage(video, 0, 0, width, height);
+      const imageData = canvasContext.getImageData(0, 0, width, height);
+      const scanResult = jsQR(imageData.data, imageData.width, imageData.height);
+
+      if (scanResult) {
+        clearInterval(intervalHandler);
+        console.log(scanResult);
+
+        if (callback) {
+          callback(scanResult);
+        }
+      }
+    }, 500)
+  };
 
 navigator.mediaDevices
     .getUserMedia({
@@ -15,23 +40,4 @@ navigator.mediaDevices
     .catch(function(err) {
         alert('Error!!')
     })
-
-const checkImage = () => {
-    // 取得している動画をCanvasに描画
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-
-    // Canvasからデータを取得
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-
-    // jsQRに渡す
-    const code = jsQR(imageData.data, canvas.width, canvas.height)
-
-    // QRコードの読み取りに成功したらモーダル開く
-    // 失敗したら再度実行
-    if (code) {
-        // openModal(code.data)
-        alert('detected')
-    } else {
-        setTimeout(() => { checkImage() }, 500)
-    }
-}
+    
