@@ -1,6 +1,4 @@
-var detectionCount = 0;
-
-
+let detectionCount = 0;
 
 AFRAME.registerComponent('registerevents', {
     init: function () {
@@ -11,12 +9,11 @@ AFRAME.registerComponent('registerevents', {
             var markerId = marker.id;
             // console.log('markerFound', markerId);
 
-            // アニメーションの開始
             // document.querySelector('#box').emit('markerfound');
             detectionCount ++;
             console.log(detectionCount);
 
-            
+            $('.modal').modal('show');
         });
 
         // マーカーを見失ったイベントの登録
@@ -24,8 +21,9 @@ AFRAME.registerComponent('registerevents', {
             var markerId = marker.id;
             // console.log('markerLost', markerId);
 
-            // アニメーションの停止
             // document.querySelector('#box').emit('markerlost');
+
+            $('.modal').modal('hide');
         });
     }
 });
