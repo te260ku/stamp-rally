@@ -1,8 +1,11 @@
 let question = document.getElementById("question");
 let detectionCount = 0;
+const questionList = [
+    "パンはパンでも食べられないパンは？"
+  ];
 
 $(document).ready(function(){
-    // show();
+    showModal();
 });
 
 $('#exampleModal').on('show.bs.modal', function (event) {
@@ -13,6 +16,11 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 const hide = function(){
     $('.modal').modal('hide');
 };
-const show = function(){
+
+
+const showModal = function () {
     $('.modal').modal('show');
-};
+    var question = $('#question');
+    var text = questionList[0];
+    question.text(text);
+  };

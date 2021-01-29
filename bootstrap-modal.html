@@ -8,6 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <title>bootstrap</title>
   </head>
+<style>
+    .choice {
+        width: 30%;
+    }
+</style>
   <body>
 
     <p>show.bs.modal: <span id="showBsModal"></span></p>
@@ -24,12 +29,16 @@
             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body text-center p-5">
             <p id="question"></p>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="modal-footer justify-content-center">
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <button type="button" class="btn btn-primary choice">1. あんパン</button>
+            <button type="button" class="btn btn-success choice">2. フライパン</button>
+            <button type="button" class="btn btn-warning choice">3. クリームパン</button>
+
+            
         </div>
         </div>
     </div>
