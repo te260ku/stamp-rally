@@ -1,11 +1,17 @@
 <!doctype HTML>
 <html>
+<link rel="stylesheet" href="./css/modaal.min.css">
+<script src='//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="./js/modaal.min.js"></script>
 <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
 <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"> </script>
 
 <script src="./js/image-tracking-script.js"></script>
 
 <body style="margin : 0px; overflow: hidden;">
+    <div id="modal" style="display:none;">
+        <p>これはサンプルです。</p>
+    </div>
     <a-scene embedded arjs>
         <a-marker preset="hiro" id="marker-hiro" registerevents>
             <a-box id="box" position="0 0.5 0" wireframe="true">
