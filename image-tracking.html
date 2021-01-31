@@ -1,21 +1,19 @@
 <!doctype HTML>
 <html>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    
-<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"> </script>
 
+<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+<!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"> </script> -->
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
 <link rel="stylesheet" href="./css/image-tracking-css.css">
-
 <script src="./js/image-tracking-script.js"></script>
 
 <body style="margin : 0px; overflow: hidden;">
-<!-- <body> -->
 
     <!-- <div class="arjs-loader">
         <div>Loading, please wait...</div>
@@ -28,7 +26,6 @@
         </button>
     </div>
 
-    
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -54,12 +51,19 @@
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
     >
         
-        <a-marker preset="hiro" id="marker-hiro" registerevents>
+        <!-- <a-marker preset="hiro" id="marker-hiro" registerevents>
             <a-box id="box" position="0 0.5 0" wireframe="true">
                 <a-animation attribute="position" from="0 0.5 0" to="0 2.5 0" dur="5000" repeat="indefinite" begin="markerfound" end="markerlost">
                 </a-animation>
             </a-box>
         </a-marker>
+
+        <a-marker preset="custom" type="pattern" url="./assets/images/pattern-cat.patt">
+            <a-box id="box" position="0 0.5 0" wireframe="true">
+                <a-animation attribute="position" from="0 0.5 0" to="0 2.5 0" dur="5000" repeat="indefinite" begin="markerfound" end="markerlost">
+                </a-animation>
+            </a-box>
+        </a-marker> -->
 
 
         <a-nft
@@ -69,11 +73,13 @@
             smoothCount="10"
             smoothTolerance=".01"
             smoothThreshold="5" 
+            registerevents
         >
-            <a-box id="box" position="0 0.5 0" wireframe="true">
-                <a-animation attribute="position" from="0 0.5 0" to="0 2.5 0" dur="5000" repeat="indefinite" begin="markerfound" end="markerlost">
-                </a-animation>
-            </a-box>
+            <a-entity
+            gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+            scale="5 5 5"
+            position="50 150 0"
+            >
         </a-nft>
 
 
