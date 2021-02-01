@@ -1,23 +1,23 @@
 const questions = [
     {
-      question: "Who is the strongest?",
+      question: "パンはパンでも食べられないパンは？",
       answers: {
-        a: "Superman",
-        b: "The Terminator",
-        c: "Waluigi, obviously"
+        a: "あんぱん",
+        b: "クリームパン",
+        c: "フライパン"
       },
       correctAnswer: "c",
       done: false, 
       result: false
     },
     {
-      question: "What is the best site ever created?",
+      question: "カメとラクダとサイが買い物をしています。何を買うのでしょうか？",
       answers: {
-        a: "SitePoint",
-        b: "Simple Steps Code",
-        c: "Trick question; they're both the best"
+        a: "キャベツ",
+        b: "カメラ",
+        c: "ペン"
       },
-      correctAnswer: "c", 
+      correctAnswer: "b", 
       done: false, 
       result: false
     },
@@ -35,29 +35,26 @@ const questions = [
     }
   ];
   
-  const quizContainer = document.getElementById('quiz');
-  const resultsContainer = document.getElementById('results');
-  const submitButton = document.getElementById('submit');
-  var unitResult = $('#unit-result');
-  var questionTitle = $('#question-title');
-  var completeRate = $('#complete-rate');
-  var correctRate = $('#correct-rate');
-  var finishInfo = $('#finish-info');
-  finishInfo.hide();
-  
-  var detectImageAudio = new Audio('./assets/audio/sample.mp3');
-  var correctAnswerAudio = new Audio('./assets/audio/correct-answer.mp3');
-  var wrongAnswerAudio = new Audio('./assets/audio/wrong-answer.mp3');
-  
-  var currentQuestion;
-  var questionNumber;
-  var completeNum = 0;
-  var modalON = false;
-  
-  
+const quizContainer = document.getElementById('quiz');
+const resultsContainer = document.getElementById('results');
+const submitButton = document.getElementById('submit');
+var unitResult = $('#unit-result');
+var questionTitle = $('#question-title');
+var completeRate = $('#complete-rate');
+var correctRate = $('#correct-rate');
+var finishInfo = $('#finish-info');
+finishInfo.hide();
 
+var correctAnswerAudio = new Audio('./assets/audio/correct-answer.mp3');
+var wrongAnswerAudio = new Audio('./assets/audio/wrong-answer.mp3');
+
+var currentQuestion;
+var questionNumber;
+var completeNum = 0;
   
-  function buildQuiz(imageNum){
+  
+  
+function buildQuiz(imageNum){
   
     unitResult.css("visibility", "hidden");
   
@@ -74,7 +71,7 @@ const questions = [
         for(letter in currentQuestion.answers){
             // ラジオボタンを作成する
             answers.push(
-                `<label class="btn btn-primary mx-2 option my-1 optionButton" style="text-align: center;
+                `<label class="btn btn-outline-primary mx-2 option my-1 optionButton" style="text-align: center;
                 width: 55%;">
                 <input type="radio" name="question${questionNumber}" value="${letter}" autocomplete="off">
                 <span>${currentQuestion.answers[letter]}</span>
@@ -101,20 +98,20 @@ const questions = [
         unitResult.css("visibility", "visible");
         quizContainer.innerHTML = "回答済み";
     }
-  }
+}
   
   
-  window.quizLib= window.quizLib|| {};
-  window.quizLib.buildQuiz = buildQuiz;
+window.quizLib= window.quizLib || {};
+window.quizLib.buildQuiz = bui;
   
   
-  function setUnitResult(sentence) {
+function setUnitResult(sentence) {
     unitResult.text(sentence);
-  }
+}
   
   
   
-  function showResults(){
+function showResults(){
   
     unitResult.css("visibility", "visible");
   
@@ -161,12 +158,12 @@ const questions = [
     }
   
     submitButton.disabled = true;
-  }
+}
   
   
-  submitButton.addEventListener('click', showResults);
+submitButton.addEventListener('click', showResults);
   
-  $("#stamp-list-button").animatedModal({
+$("#stamp-list-button").animatedModal({
     animatedIn:'bounceInUp',
     animatedOut:'bounceOutDown',
     color:'white',
@@ -212,5 +209,5 @@ const questions = [
     afterClose: function() {
         $(".thumb").hide();
     }
-  });
+});
   

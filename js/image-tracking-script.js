@@ -1,26 +1,20 @@
-// const hide = function(){
-//   $('.modal').modal('hide');
-// };
-// const showModal = function (num) {
-//   $('#exampleModal').modal('show');
-//   detectImageAudio.play();
-//   if (!modalON) {
-//     buildQuiz(num);
-//     modalON = true;
-//   }
-// };
+var detectImageAudio = new Audio('./assets/audio/sample.mp3');
+var modalON = false;
 
 const showModal = function (imageNum) {
-  $('.modal').modal('show');
-  // var question = $('#question');
-  // question.text(questionList[imageNum]);
-  // buildQuiz();
+  if (!modalON) {
+    detectImageAudio.play();
+    $('.modal').modal('show');
+    buildQuiz(num);
+    modalON = true;
+  }
   window.quizLib.buildQuiz(imageNum);
 };
 
 
 const closeModal = function () {
-$('.modal').modal('hide');
+  $('.modal').modal('hide');
+  modalON = false;
 };
 
 
@@ -40,19 +34,15 @@ AFRAME.registerComponent('registerevents', {
             case "road":
               showModal(1);
               break;
-          
             default:
-              // showModal();
               break;
           }
-            // document.querySelector('#box').emit('markerfound');
         });
 
         // マーカーを見失ったイベントの登録
         marker.addEventListener('markerLost', function () {
             var markerId = marker.id;
-            // document.querySelector('#box').emit('markerlost');
-            // closeModal();
+            console.log(markerId);
         });
     }
 });

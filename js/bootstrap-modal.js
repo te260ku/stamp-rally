@@ -22,24 +22,24 @@ $('#exampleModal').on('hide.bs.modal', function () {
 
 const questions = [
     {
-      question: "Who is the strongest?",
+      question: "パンはパンでも食べられないパンは？",
       answers: {
-        a: "Superman",
-        b: "The Terminator",
-        c: "Waluigi, obviously"
+        a: "あんぱん",
+        b: "クリームパン",
+        c: "フライパン"
       },
       correctAnswer: "c",
       done: false, 
       result: false
     },
     {
-      question: "What is the best site ever created?",
+      question: "カメとラクダとサイが買い物をしています。何を買うのでしょうか？",
       answers: {
-        a: "SitePoint",
-        b: "Simple Steps Code",
-        c: "Trick question; they're both the best"
+        a: "キャベツ",
+        b: "カメラ",
+        c: "ペン"
       },
-      correctAnswer: "c", 
+      correctAnswer: "b", 
       done: false, 
       result: false
     },
@@ -55,7 +55,7 @@ const questions = [
       done: false, 
       result: false
     }
-];
+  ];
 
 const quizContainer = document.getElementById('quiz');
 const resultsContainer = document.getElementById('results');
@@ -95,7 +95,7 @@ function buildQuiz(imageNum){
         for(letter in currentQuestion.answers){
             // ラジオボタンを作成する
             answers.push(
-                `<label class="btn btn-primary mx-2 option my-1 optionButton" style="text-align: center;
+                `<label class="btn btn-outline-primary mx-2 option my-1 optionButton" style="text-align: center;
                 width: 55%;">
                 <input type="radio" name="question${questionNumber}" value="${letter}" autocomplete="off">
                 <span>${currentQuestion.answers[letter]}</span>
