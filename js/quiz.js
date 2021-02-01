@@ -102,7 +102,7 @@ function buildQuiz(imageNum){
   
   
 window.quizLib= window.quizLib || {};
-window.quizLib.buildQuiz = bui;
+window.quizLib.buildQuiz = buildQuiz;
   
   
 function setUnitResult(sentence) {

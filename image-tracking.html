@@ -27,13 +27,13 @@
         
 
 
-    <div class="arjs-loader">
+    <!-- <div class="arjs-loader">
         <div>Loading, please wait...</div>
-    </div>
+    </div> -->
 
     
 
-
+    <div class="container">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <span class="navbar-brand p-2">
           Stamp Rally
@@ -47,6 +47,7 @@
           </div>
         </div>
       </nav>
+    </div>
 
  
     <div id="stamp-list-modal">
@@ -189,28 +190,13 @@
 
 
 
-    
+    <div>
     <a-scene embedded arjs
         vr-mode-ui="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
         embedded
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
     >
-        
-        <!-- <a-marker preset="hiro" id="marker-hiro" registerevents>
-            <a-box id="box" position="0 0.5 0" wireframe="true">
-                <a-animation attribute="position" from="0 0.5 0" to="0 2.5 0" dur="5000" repeat="indefinite" begin="markerfound" end="markerlost">
-                </a-animation>
-            </a-box>
-        </a-marker>
-
-        <a-marker preset="custom" type="pattern" url="./assets/images/pattern-cat.patt">
-            <a-box id="box" position="0 0.5 0" wireframe="true">
-                <a-animation attribute="position" from="0 0.5 0" to="0 2.5 0" dur="5000" repeat="indefinite" begin="markerfound" end="markerlost">
-                </a-animation>
-            </a-box>
-        </a-marker> -->
-
         
         <a-nft
             id="road" 
@@ -241,6 +227,7 @@
 
         <a-entity camera></a-entity>
     </a-scene>
+    </div>
 
 
 
