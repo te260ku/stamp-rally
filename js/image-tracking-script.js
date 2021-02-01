@@ -2,12 +2,12 @@ var detectImageAudio = new Audio('./assets/audio/sample.mp3');
 var modalON = false;
 
 const showModal = function (imageNum) {
-  if (!modalON) {
+  // if (!modalON) {
     // detectImageAudio.play();
     $('.modal').modal('show');
     window.quizLib.buildQuiz(imageNum);
     modalON = true;
-  }
+  // }
   
 };
 
