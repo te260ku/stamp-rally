@@ -5,7 +5,7 @@ const showModal = function (imageNum) {
   if (!modalON) {
     detectImageAudio.play();
     $('.modal').modal('show');
-    buildQuiz(num);
+    buildQuiz(imageNum);
     modalON = true;
   }
   window.quizLib.buildQuiz(imageNum);
