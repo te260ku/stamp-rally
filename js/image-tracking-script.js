@@ -3,12 +3,12 @@ var modalON = false;
 
 const showModal = function (imageNum) {
   if (!modalON) {
-    detectImageAudio.play();
+    // detectImageAudio.play();
     $('.modal').modal('show');
-    buildQuiz(imageNum);
+    window.quizLib.buildQuiz(imageNum);
     modalON = true;
   }
-  window.quizLib.buildQuiz(imageNum);
+  
 };
 
 
@@ -16,6 +16,22 @@ const closeModal = function () {
   $('.modal').modal('hide');
   modalON = false;
 };
+
+
+$('.modal').on('show.bs.modal', function (event) {
+  // var id = $(event.relatedTarget).attr('id').substr(-1, 1);
+
+  detectImageAudio.play();
+  
+  // if (!modalON) {
+  //     buildQuiz(id);
+  //     modalON = true;
+  // }
+});
+
+$('.modal').on('hide.bs.modal', function () {
+  modalON = false;
+});
 
 
 AFRAME.registerComponent('registerevents', {
