@@ -1,4 +1,3 @@
-
 var detectionCount = 0;
 var questionList = [
   "パンはパンでも食べられないパンは？"

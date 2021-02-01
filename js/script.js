@@ -1,43 +1,123 @@
-const video = document.getElementById('player');
-const snapshotCanvas = document.getElementById('snapshot');
-const width = snapshotCanvas.width;
-const height = snapshotCanvas.height;
+var detectionCount = 0;
+var questionList = [
+  "trex", 
+  "road"
+];
 
-let handleSuccess = function(stream) {
-    video.srcObject = stream;
 
-    startScan((scanResult) => {
-        // このページの呼び出し元に読み取り結果を返す
-    });
+const questions = [
+    {
+      question: "Who is the strongest?",
+      answers: {
+        a: "Superman",
+        b: "The Terminator",
+        c: "Waluigi, obviously"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "What is the best site ever created?",
+      answers: {
+        a: "SitePoint",
+        b: "Simple Steps Code",
+        c: "Trick question; they're both the best"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "Where is Waldo really?",
+      answers: {
+        a: "Antarctica",
+        b: "Exploring the Pacific Ocean",
+        c: "Sitting in a tree",
+        d: "Minding his own business, so stop asking"
+      },
+      correctAnswer: "d"
+    }
+];
+
+const quizContainer = document.getElementById('quiz');
+const resultsContainer = document.getElementById('results');
+const submitButton = document.getElementById('submit');
+
+
+function buildQuiz(){
+
+    const output = [];
+    
+  
+    questions.forEach(
+      (currentQuestion, questionNumber) => {
+  
+        const answers = [];
+  
+        for(letter in currentQuestion.answers){
+  
+          answers.push(
+            `<label>
+              <input type="radio" name="question${questionNumber}" value="${letter}">
+              ${letter} :
+              ${currentQuestion.answers[letter]}
+            </label>`
+          );
+        }
+  
+        output.push(
+          `<div class="question"> ${currentQuestion.question} </div>
+          <div class="answers"> ${answers.join('')} </div>`
+        );
+      }
+    );
+  
+    quizContainer.innerHTML = output.join('');
+  }
+
+
+function showResults(){}
+
+submitButton.addEventListener('click', showResults);
+
+const showModal = function (imageNum) {
+    $('.modal').modal('show');
+    // var question = $('#question');
+    // question.text(questionList[imageNum]);
+    buildQuiz();
+  };
+  
+  
+const closeModal = function () {
+$('.modal').modal('hide');
 };
 
+AFRAME.registerComponent('registerevents', {
+    init: function () {
+        var marker = this.el;
 
-let startScan = function(callback) {
-    const canvasContext = snapshotCanvas.getContext("2d");
-    // 500ms間隔でスナップショットを取得し、QRコードの読み取りを行う
-    let intervalHandler = setInterval(() => {
-      canvasContext.drawImage(video, 0, 0, width, height);
-      const imageData = canvasContext.getImageData(0, 0, width, height);
-      const scanResult = jsQR(imageData.data, imageData.width, imageData.height);
+        // マーカーを検出したイベントの登録
+        marker.addEventListener('markerFound', function () {
+            var markerId = marker.id;
+            console.log(markerId);
 
-      if (scanResult) {
-        clearInterval(intervalHandler);
-        console.log(scanResult);
+            switch (markerId) {
+              case "trex":
+                showModal(0);
+                break;
+              case "road":
+                showModal(1);
+                break;
+            
+              default:
+                // showModal();
+                break;
+            }
+            // document.querySelector('#box').emit('markerfound');
+        });
 
-        if (callback) {
-          callback(scanResult);
-        }
-      }
-    }, 500)
-  };
-
-navigator.mediaDevices
-    .getUserMedia({
-        audio: false,
-        video: {facingMode: "environment"},
-    })
-    .then(handleSuccess)
-    .catch(function(err) {
-        alert('Error!!')
-    })
-    
+        // マーカーを見失ったイベントの登録
+        marker.addEventListener('markerLost', function () {
+            var markerId = marker.id;
+            // document.querySelector('#box').emit('markerlost');
+            closeModal();
+        });
+    }
+});
