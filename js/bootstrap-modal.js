@@ -49,6 +49,8 @@ $(document).ready(function(){
 
 $('#exampleModal').on('show.bs.modal', function (event) {
     var id = $(event.relatedTarget).attr('id').substr(-1, 1);
+
+    detectImageAudio.play();
     
     if (!modalON) {
         buildQuiz(id);
@@ -73,6 +75,8 @@ var completeRate = $('#complete-rate');
 var correctRate = $('#correct-rate');
 var finishInfo = $('#finish-info');
 finishInfo.hide();
+
+var detectImageAudio = new Audio('./assets/audio/sample.mp3');
 
 var currentQuestion;
 var questionNumber;
