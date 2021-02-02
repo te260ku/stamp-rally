@@ -75,3 +75,9 @@ color: white;
   letter-spacing: 2px;
   vertical-align: middle;
 }
+
+.btn-close {
+  background-image: url('../assets/images/close-modal.png');
+  color: black;
+  background-size: 100%;
+}

@@ -145,13 +145,12 @@
       <div class="nav-area"></div>
 
 
-        <div class="py-4 alert alert-primary text-center" role="alert">景品応募フォーム</div>
-
-        <div class="container text-center">
-            <button type="button" class="btn btn-primary close-gift-form-modal">
-                close
-            </button>
+        <div class="py-4 alert alert-primary text-center" role="alert">
+          <p>景品応募フォーム</p>
+          
+          <button type="button" class="btn-close close-gift-form-modal" aria-label="Close"></button>
         </div>
+
 
         <div class="container">
 
@@ -173,7 +172,7 @@
               
             <div class="row">
               <div id="gift-form">
-                <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScBVMt357SMiS37tOAl9bGR7J2formC1e6U4pFZ6zvIoAuorQ/viewform?embedded=true" width="640" height="943" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe> -->
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScBVMt357SMiS37tOAl9bGR7J2formC1e6U4pFZ6zvIoAuorQ/viewform?embedded=true" width="640" height="943" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
               </div>
 
               
@@ -190,18 +189,12 @@
  <!-- stamp-list-modal -->
     <div id="stamp-list-modal">
       <div class="nav-area"></div>
-
-
-        <div class="py-4 alert alert-primary text-center" role="alert">スタンプ一覧</div>
-
-        <div class="container text-center">
-            <button type="button" class="btn btn-primary close-stamp-list-modal">
-                close
-            </button>
-            
-
-
+        <div class="py-4 alert alert-primary text-center" role="alert">
+          <p>スタンプ一覧</p>
+          
+          <button type="button" class="btn-close close-stamp-list-modal" aria-label="Close"></button>
         </div>
+
 
         <div class="container">
 
@@ -212,16 +205,16 @@
                 <div class="correct-rate py-1">/</div>
             </div>
 
-            <button class="btn btn-primary gift-form-button mb-4" href="#gift-form-modal">
-              景品応募フォーム
-            </button>
+            
 
             <div class="alert alert-danger mt-3 finish-info"role="alert">
                 <p class="my-0"> すべてのスタンプを集めました！
                     景品の抽選に応募するには必要な情報をフォームに入力してください
                 </p>
                 
-
+                <button class="btn btn-primary gift-form-button mb-4" href="#gift-form-modal">
+                  景品応募フォーム
+                </button>
             </div>
               
             <div class="row row-cols-2 row-cols-md-2 g-4" id="stamp-list">
