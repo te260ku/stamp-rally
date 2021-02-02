@@ -353,8 +353,8 @@ function count(num){
     return dfd.promise();
   }
 
-// $('#title-modal-button').click();
-// count(2).then(count(3)).then(count(4)).then(count(6)).then(count(7));
+$('#title-modal-button').click();
+count(5).then(count(6)).then(count(7)).then(count(9)).then(count(10));
 
 
 //   $('#title-modal').addClass('zoomIn').one('animationend', function () {
