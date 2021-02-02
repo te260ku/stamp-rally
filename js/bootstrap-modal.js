@@ -232,3 +232,76 @@ $("#stamp-list-button").animatedModal({
         $(".thumb").hide();
     }
 });
+
+
+
+// 0202
+// タイトル画面
+
+function setAnimation(element, anim) {
+    if (element.hasClass('animated')) {
+        element.addClass(anim);
+    } else {
+        element.addClass('animated ' + anim);
+    }
+}
+
+$("#title-modal-button").animatedModal( {
+    animatedIn: "none",
+});
+
+var titleLoading = $('.title-loading');
+var titleAnimationStep = 0;
+var loadedMessage = $('#loaded-message')
+var titleLogo = $('#title-logo');
+loadedMessage.hide();
+
+function count(num){
+    num = parseInt(num);
+    var dfd = new $.Deferred();
+    var delay = (num*1000);
+    setTimeout(function(){
+        
+        titleAnimationStep ++;
+        console.log('step: ' + titleAnimationStep)
+        
+        var tmp = titleAnimationStep;
+      switch (tmp) {
+          case 1:
+            setAnimation(titleLoading, 'zoomOut');
+              
+              break;
+          case 2:
+            
+            setAnimation(titleLogo, 'zoomOutUp');
+              break;
+          case 3:
+            titleLogo.css('display', 'none');
+            loadedMessage.show();
+              setAnimation(loadedMessage, 'fadeIn');
+              break;
+          case 4:
+              setAnimation(loadedMessage, 'fadeOut')
+              
+              break;
+          case 5:
+            $('.close-title-modal').click();
+                break;
+
+          default:
+              break;
+      }
+      dfd.resolve();
+    }, delay);
+    
+    return dfd.promise();
+  }
+
+  $('#title-modal-button').click();
+  
+  count(1).then(count(2)).then(count(3)).then(count(5)).then(count(6));
+
+
+//   $('#title-modal').addClass('zoomIn').one('animationend', function () {
+//     $('#title-modal').removeClass('zoomIn');
+//   });;

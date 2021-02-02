@@ -22,14 +22,14 @@ const questions = [
       result: false
     },
     {
-      question: "Where is Waldo really?",
+      question: "1+1=",
       answers: {
-        a: "Antarctica",
-        b: "Exploring the Pacific Ocean",
-        c: "Sitting in a tree",
-        d: "Minding his own business, so stop asking"
+        a: "2",
+        b: "3",
+        c: "4",
+        d: "5"
       },
-      correctAnswer: "d", 
+      correctAnswer: "a", 
       done: false, 
       result: false
     }

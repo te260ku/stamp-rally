@@ -61,3 +61,17 @@ color: white;
     display: block;
     color: black;
   }
+
+.title {
+  color: white;
+  font-family: 'arial black';
+  font-size: 30px;
+}
+
+#loaded-message {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  vertical-align: middle;
+}
