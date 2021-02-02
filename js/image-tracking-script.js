@@ -56,9 +56,9 @@ AFRAME.registerComponent('registerevents', {
 
 // 0202
 
-// window.addEventListener('arjs-nft-loaded', function(){
-//   $('.close-title-modal').click();
-// })
+window.addEventListener('arjs-nft-loaded', function(){
+  $('.close-title-modal').click();
+})
 
 
 

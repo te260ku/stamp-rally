@@ -305,3 +305,17 @@ function count(num){
 //   $('#title-modal').addClass('zoomIn').one('animationend', function () {
 //     $('#title-modal').removeClass('zoomIn');
 //   });;
+
+var imageTestButtons = $('.image-test-button');
+var switchImageTestButtons = document.getElementById('switch-image-test-button');
+var isImageTestButtonsOn = true;
+
+switchImageTestButtons.addEventListener('click', function () {
+    if (isImageTestButtonsOn) {
+        imageTestButtons.css('visibility', 'hidden');
+    } else {
+        imageTestButtons.css('visibility', 'visible');
+    }
+    isImageTestButtonsOn = !isImageTestButtonsOn;
+    
+})
