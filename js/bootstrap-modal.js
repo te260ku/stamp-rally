@@ -23,6 +23,7 @@ $('#exampleModal').on('hide.bs.modal', function () {
 const questions = [
     {
       question: "パンはパンでも食べられないパンは？",
+      type: "choice", 
       answers: {
         a: "あんぱん",
         b: "クリームパン",
@@ -33,7 +34,8 @@ const questions = [
       result: false
     },
     {
-      question: "カメとラクダとサイが買い物をしています。何を買うのでしょうか？",
+      question: "カメとラクダとサイが買い物をしています。何を買うでしょうか？",
+      type: "choice", 
       answers: {
         a: "キャベツ",
         b: "カメラ",
@@ -44,14 +46,9 @@ const questions = [
       result: false
     },
     {
-      question: "Where is Waldo really?",
-      answers: {
-        a: "Antarctica",
-        b: "Exploring the Pacific Ocean",
-        c: "Sitting in a tree",
-        d: "Minding his own business, so stop asking"
-      },
-      correctAnswer: "d", 
+      question: "こいでもこいでも同じところを行ったり来たりする乗り物は？",
+      type: "text", 
+      correctAnswer: "ブランコ", 
       done: false, 
       result: false
     }
@@ -92,20 +89,27 @@ function buildQuiz(imageNum){
         // 選択肢を格納する配列
         const answers = [];
 
-        for(letter in currentQuestion.answers){
-            // ラジオボタンを作成する
+        if (currentQuestion.type == "choice") {
+            for(letter in currentQuestion.answers){
+                // ラジオボタンを作成する
+                answers.push(
+                    `<label class="btn btn-outline-primary mx-2 option my-1 optionButton" style="text-align: center;
+                    width: 55%;">
+                    <input type="radio" name="question${questionNumber}" value="${letter}" autocomplete="off">
+                    <span>${currentQuestion.answers[letter]}</span>
+                    </label>`
+                );
+            };
+        } else if (currentQuestion.type == "text") {
             answers.push(
-                `<label class="btn btn-outline-primary mx-2 option my-1 optionButton" style="text-align: center;
-                width: 55%;">
-                <input type="radio" name="question${questionNumber}" value="${letter}" autocomplete="off">
-                <span>${currentQuestion.answers[letter]}</span>
-                </label>`
+                `<input class="form-control" id="textAnswerArea" placeholder="答えを入力">`
             );
-        };
+        }
+        
 
         // 問題と回答を追加する
         output.push(
-            `<div class="question"> ${currentQuestion.question} </div>
+            `<div class="question mb-4"> ${currentQuestion.question} </div>
             <div class="answers btn-group-toggle" data-toggle="buttons"> ${answers.join('')} </div>`
         );
     
@@ -137,23 +141,36 @@ function showResults(){
 
     unitResult.css("visibility", "visible");
 
-    var optionButtons = document.querySelectorAll('.optionButton');
-    var optionButtonStates = [];
-    optionButtons.forEach(optionButton => {
-        optionButtonStates.push(optionButton.classList.contains('active'));
-    });
+    var userAnswer;
 
-    if (!optionButtonStates.includes(true)) {
-        
-        setUnitResult("回答を選択してください");
-        return;
+    if (currentQuestion.type == "choice") {
+        var optionButtons = document.querySelectorAll('.optionButton');
+        var optionButtonStates = [];
+        optionButtons.forEach(optionButton => {
+            optionButtonStates.push(optionButton.classList.contains('active'));
+        });
+
+        if (!optionButtonStates.includes(true)) {
+            setUnitResult("回答を選択してください");
+            return;
+        }
+
+        const answerContainer = quizContainer.querySelector('.answers');
+
+        // 選択中のボタンを取得するセレクターを定義
+        const selector = 'input[name=question'+questionNumber+']:checked';
+        userAnswer = (answerContainer.querySelector(selector) || {}).value;
+    
+    } 
+    else if (currentQuestion.type == "text") {
+        userAnswer = document.getElementById('textAnswerArea').value;
+        if (userAnswer == "") {
+            setUnitResult("回答を入力してください");
+            return;
+        }
     }
 
-    const answerContainer = quizContainer.querySelector('.answers');
-
-    // 選択中のボタンを取得するセレクターを定義
-    const selector = 'input[name=question'+questionNumber+']:checked';
-    const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+    
 
     console.log(userAnswer);
 
@@ -255,6 +272,8 @@ var titleAnimationStep = 0;
 var loadedMessage = $('#loaded-message')
 var titleLogo = $('#title-logo');
 loadedMessage.hide();
+var hideLogoAudio = new Audio('./assets/audio/hide-logo.mp3');
+var startAudio = new Audio('./assets/audio/start.mp3');
 
 function count(num){
     num = parseInt(num);
@@ -274,8 +293,10 @@ function count(num){
           case 2:
             
             setAnimation(titleLogo, 'zoomOutUp');
+            
               break;
           case 3:
+            startAudio.play();
             titleLogo.css('display', 'none');
             loadedMessage.show();
               setAnimation(loadedMessage, 'fadeIn');
@@ -297,9 +318,8 @@ function count(num){
     return dfd.promise();
   }
 
-  $('#title-modal-button').click();
-  
-  count(1).then(count(2)).then(count(3)).then(count(5)).then(count(6));
+$('#title-modal-button').click();
+count(2).then(count(3)).then(count(4)).then(count(6)).then(count(7));
 
 
 //   $('#title-modal').addClass('zoomIn').one('animationend', function () {
