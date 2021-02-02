@@ -2,13 +2,10 @@ var detectImageAudio = new Audio('./assets/audio/sample.mp3');
 var modalON = false;
 
 const showModal = function (imageNum) {
-  // if (!modalON) {
-    // detectImageAudio.play();
-    $('.modal').modal('show');
-    window.quizLib.buildQuiz(imageNum);
-    modalON = true;
-  // }
-  
+  detectImageAudio.play();
+  $('.modal').modal('show');
+  window.quizLib.buildQuiz(imageNum);
+  modalON = true;
 };
 
 
@@ -19,14 +16,7 @@ const closeModal = function () {
 
 
 $('.modal').on('show.bs.modal', function (event) {
-  // var id = $(event.relatedTarget).attr('id').substr(-1, 1);
-
-  detectImageAudio.play();
-  
-  // if (!modalON) {
-  //     buildQuiz(id);
-  //     modalON = true;
-  // }
+  modalON = true;
 });
 
 $('.modal').on('hide.bs.modal', function () {
@@ -63,6 +53,12 @@ AFRAME.registerComponent('registerevents', {
     }
 });
 
+
+// 0202
+
+// window.addEventListener('arjs-nft-loaded', function(){
+//   $('.close-title-modal').click();
+// })
 
 
 
