@@ -78,6 +78,14 @@ var modalON = false;
 
 
 
+// ナビゲーション
+var navTemplate = document.getElementById('nav-template');
+var clone = navTemplate.content.cloneNode(true);
+$('.nav-area').append(clone);
+// 
+
+
+
 function buildQuiz(imageNum){
 
     unitResult.css("visibility", "hidden");
@@ -138,6 +146,11 @@ function setUnitResult(sentence) {
     unitResult.text(sentence);
 }
 
+function finish() {
+    finishInfo.show();
+    giftFormInfo.text("すべてのスタンプを集めました！景品に応募するには以下のフォームを入力してください");
+    giftForm.show();
+}
 
 
 function showResults(){
@@ -196,9 +209,7 @@ function showResults(){
 
     // 全ての問題に回答した後の処理
     if (completeNum >= questions.length) {
-        finishInfo.show();    
-        giftFormInfo.text("すべてのスタンプを集めました！景品に応募するには以下のフォームを入力してください");
-        giftForm.show();
+        finish();
     } 
 
     submitButton.disabled = true;
@@ -223,12 +234,13 @@ function calcRateInfo() {
     correctRate.text('正答率: ' + correctCount + '/' + completeCount);
 }
 
-$("#stamp-list-button").animatedModal({
+$(".stamp-list-button").animatedModal({
     animatedIn:'bounceInUp',
     animatedOut:'bounceOutDown',
     color:'white',
     animationDuration:'.7s',
     beforeOpen: function() {
+        $('.close-gift-form-modal').click();
 
         var children = $(".thumb");
         var images = document.querySelectorAll('.card-img-top');
@@ -349,9 +361,7 @@ function count(num){
 //     $('#title-modal').removeClass('zoomIn');
 //   });;
 
-var navTemplate = document.getElementById('nav-template');
-var clone = navTemplate.content.cloneNode(true);
-$('.nav-area').append(clone);
+
 
 var imageTestButtons = $('.image-test-button');
 var switchImageTestButtons = document.getElementById('switch-image-test-button');
@@ -382,12 +392,13 @@ for (var i=0; i<questions.length; i++) {
 
 
 // gift form
-$("#gift-form-button").animatedModal({
+$(".gift-form-button").animatedModal({
     animatedIn:'bounceInUp',
     animatedOut:'bounceOutDown',
     color:'white',
     animationDuration:'.7s',
     beforeOpen: function () {
+        $('.close-stamp-list-modal').click();
         calcRateInfo();
     }
 });
