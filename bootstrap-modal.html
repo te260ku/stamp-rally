@@ -62,7 +62,7 @@
     </div>
 
 
-    <!-- template -->
+    <!-- stamp list template-->
     <template id="stamp-list-template">
       <div class="col">
         <div class="card h-100 thumb">
@@ -77,11 +77,11 @@
         </div>
       </div>
     </template>
-    
     <!--  -->
 
-
-
+    
+    <!-- nav template -->
+    <template id="nav-template">
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <span class="navbar-brand p-2">
           Stamp Rally
@@ -94,28 +94,95 @@
             <a class="nav-item nav-link" id="stamp-list-button" href="#stamp-list-modal">
               スタンプ一覧
             </a>
+            <a class="nav-item nav-link" id="gift-form-button" href="#gift-form-modal">
+              景品応募フォーム
+            </a>
             <a class="nav-item nav-link" id="switch-image-test-button">
               show/hide
             </a>
           </div>
         </div>
       </nav>
+    </template>
 
- 
-    <div id="stamp-list-modal">
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <span class="navbar-brand p-2">
-          Stamp Rally
-        </span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu2a" aria-controls="navmenu2a" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navmenu2a">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" id="stamp-list-button" href="#stamp-list-modal">スタンプ一覧</a>
-          </div>
+    
+
+    
+    <!--  -->
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <span class="navbar-brand p-2">
+        Stamp Rally
+      </span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu2a" aria-controls="navmenu2a" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu2a">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="stamp-list-button" href="#stamp-list-modal">
+            スタンプ一覧
+          </a>
+          <a class="nav-item nav-link" id="gift-form-button" href="#gift-form-modal">
+            景品応募フォーム
+          </a>
+          <a class="nav-item nav-link" id="switch-image-test-button">
+            show/hide
+          </a>
         </div>
-      </nav>
+      </div>
+    </nav>
+
+
+      
+
+
+      <!-- 0202 -->
+      <!-- gift form modal -->
+    <div id="gift-form-modal">
+      <div class="nav-area"></div>
+
+
+        <div class="py-4 alert alert-primary text-center" role="alert">景品応募フォーム</div>
+
+        <div class="container text-center">
+            <button type="button" class="btn btn-primary close-gift-form-modal">
+                close
+            </button>
+        </div>
+
+        <div class="container">
+
+          <div class="col-md-8 col-sm-8 m-auto">
+
+            <div class="alert alert-info mt-3" role="alert">
+              <div class="complete-rate py-1">/</div>
+              <div class="correct-rate py-1">/</div>
+          </div>
+
+          <div class="alert alert-danger mt-3 gift-form-info" role="alert">
+              <p class="my-0"> スタンプを集めてください
+              </p>
+          </div>
+              
+            <div class="row">
+              <div id="gift-form">
+                <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScBVMt357SMiS37tOAl9bGR7J2formC1e6U4pFZ6zvIoAuorQ/viewform?embedded=true" width="640" height="943" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe> -->
+              </div>
+
+              
+            </div>
+
+
+        </div>
+        </div>
+
+    </div> 
+    <!--  -->
+
+
+ <!-- stamp-list-modal -->
+    <div id="stamp-list-modal">
+      <div class="nav-area"></div>
 
 
         <div class="py-4 alert alert-primary text-center" role="alert">スタンプ一覧</div>
@@ -134,11 +201,11 @@
           <div class="col-md-8 col-sm-8 m-auto">
 
             <div class="alert alert-info mt-3" role="alert">
-                <div id="complete-rate" class="py-1">/</div>
-                <div id="correct-rate" class="py-1">/</div>
+                <div class="complete-rate py-1">/</div>
+                <div class="correct-rate py-1">/</div>
             </div>
 
-            <div class="alert alert-danger mt-3" id="finish-info" role="alert">
+            <div class="alert alert-danger mt-3 finish-info"role="alert">
                 <p class="my-0"> すべてのスタンプを集めました！
                     景品の抽選に応募するには下のURLにアクセスしてください
                 </p>
@@ -153,7 +220,7 @@
         </div>
 
     </div> 
-<!-- stamp-list-modal -->
+<!--  -->
 
 
     <div class="container mt-3">

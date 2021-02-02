@@ -59,10 +59,13 @@ const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
 var unitResult = $('#unit-result');
 var questionTitle = $('#question-title');
-var completeRate = $('#complete-rate');
-var correctRate = $('#correct-rate');
-var finishInfo = $('#finish-info');
+var completeRate = $('.complete-rate');
+var correctRate = $('.correct-rate');
+var finishInfo = $('.finish-info');
 finishInfo.hide();
+var giftFormInfo = $('.gift-form-info');
+var giftForm = $('#gift-form')
+giftForm.hide();
 
 var detectImageAudio = new Audio('./assets/audio/sample.mp3');
 var correctAnswerAudio = new Audio('./assets/audio/correct-answer.mp3');
@@ -194,13 +197,31 @@ function showResults(){
     // 全ての問題に回答した後の処理
     if (completeNum >= questions.length) {
         finishInfo.show();    
-    }
+        giftFormInfo.text("すべてのスタンプを集めました！景品に応募するには以下のフォームを入力してください");
+        giftForm.show();
+    } 
 
     submitButton.disabled = true;
 }
 
 
 submitButton.addEventListener('click', showResults);
+
+function calcRateInfo() {
+    var correctCount = 0;
+        var completeCount = 0;
+        questions.forEach(question => {
+            if (question.done) {
+                completeCount ++;
+                if (question.result) {
+                    correctCount ++;
+                }
+            }
+        });
+
+    completeRate.text('達成率: ' + completeCount + '/' + questions.length);
+    correctRate.text('正答率: ' + correctCount + '/' + completeCount);
+}
 
 $("#stamp-list-button").animatedModal({
     animatedIn:'bounceInUp',
@@ -229,24 +250,8 @@ $("#stamp-list-button").animatedModal({
                 }
             });
         }
-
         
-
-        var correctCount = 0;
-        var completeCount = 0;
-        questions.forEach(question => {
-            if (question.done) {
-                completeCount ++;
-                if (question.result) {
-                    correctCount ++;
-                }
-            }
-        });
-
-        completeRate.text('達成率: ' + completeCount + '/' + questions.length);
-        correctRate.text('正答率: ' + correctCount + '/' + completeCount);
-
-        
+        calcRateInfo();
 
         addClassNextChild();
 
@@ -344,6 +349,10 @@ function count(num){
 //     $('#title-modal').removeClass('zoomIn');
 //   });;
 
+var navTemplate = document.getElementById('nav-template');
+var clone = navTemplate.content.cloneNode(true);
+$('.nav-area').append(clone);
+
 var imageTestButtons = $('.image-test-button');
 var switchImageTestButtons = document.getElementById('switch-image-test-button');
 var isImageTestButtonsOn = true;
@@ -360,9 +369,25 @@ switchImageTestButtons.addEventListener('click', function () {
 
 
 // template
-var template = document.getElementById('stamp-list-template');
+var stampListTemplate = document.getElementById('stamp-list-template');
 for (var i=0; i<questions.length; i++) {
     
-    var clone = template.content.cloneNode(true);
+    var clone = stampListTemplate.content.cloneNode(true);
+    var tmp = i+1;
+    clone.querySelector('.stamp-list-title').textContent = '問題: ' + tmp;
+    clone.querySelector('.stamp-list-text').textContent = questions[i].question;
     document.getElementById('stamp-list').appendChild(clone)   
 };
+
+
+
+// gift form
+$("#gift-form-button").animatedModal({
+    animatedIn:'bounceInUp',
+    animatedOut:'bounceOutDown',
+    color:'white',
+    animationDuration:'.7s',
+    beforeOpen: function () {
+        calcRateInfo();
+    }
+});
