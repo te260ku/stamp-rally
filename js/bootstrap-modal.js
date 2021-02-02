@@ -220,13 +220,17 @@ $("#stamp-list-button").animatedModal({
             window.setTimeout(addClassNextChild, 100);
         }
 
-        images.forEach((element, index) => {
-            if (questions[index].done) {
-                element.style.opacity = 1;
-            } else {
-                element.style.opacity = 0.3;
-            }
-        });
+        if (images.length <= questions.length) {
+            images.forEach((element, index) => {
+                if (questions[index].done) {
+                    element.style.opacity = 1;
+                } else {
+                    element.style.opacity = 0.3;
+                }
+            });
+        }
+
+        
 
         var correctCount = 0;
         var completeCount = 0;
@@ -242,7 +246,21 @@ $("#stamp-list-button").animatedModal({
         completeRate.text('達成率: ' + completeCount + '/' + questions.length);
         correctRate.text('正答率: ' + correctCount + '/' + completeCount);
 
+        
+
         addClassNextChild();
+
+        // 0202
+        // var stampListText = $('.stamp-list-text');
+        // stampListText.each(function(index, element){
+        //     $(element).text(questions[index].question);
+        //     if (questions[index].done) {
+                
+        //     } else {
+                
+        //     } 
+        // })
+        // ---
 
     },
     afterClose: function() {
@@ -318,8 +336,8 @@ function count(num){
     return dfd.promise();
   }
 
-$('#title-modal-button').click();
-count(2).then(count(3)).then(count(4)).then(count(6)).then(count(7));
+// $('#title-modal-button').click();
+// count(2).then(count(3)).then(count(4)).then(count(6)).then(count(7));
 
 
 //   $('#title-modal').addClass('zoomIn').one('animationend', function () {
@@ -339,3 +357,12 @@ switchImageTestButtons.addEventListener('click', function () {
     isImageTestButtonsOn = !isImageTestButtonsOn;
     
 })
+
+
+// template
+var template = document.getElementById('stamp-list-template');
+for (var i=0; i<questions.length; i++) {
+    
+    var clone = template.content.cloneNode(true);
+    document.getElementById('stamp-list').appendChild(clone)   
+};
