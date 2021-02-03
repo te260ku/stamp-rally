@@ -60,12 +60,20 @@ const submitButton = document.getElementById('submit');
 var unitResult = $('#unit-result');
 var questionTitle = $('#question-title');
 var completeRate = $('.complete-rate');
-var correctRate = $('.correct-rate');
+var correctRateInfo = $('.correct-rate');
 var finishInfo = $('.finish-info');
 finishInfo.hide();
 var giftFormInfo = $('.gift-form-info');
-var giftForm = $('#gift-form')
+var giftForm = $('.gift-form');
 giftForm.hide();
+const giftFormURL = {
+    high : "https://docs.google.com/forms/d/e/1FAIpQLScBVMt357SMiS37tOAl9bGR7J2formC1e6U4pFZ6zvIoAuorQ/viewform?embedded=true", 
+    middle : "https://docs.google.com/forms/d/e/1FAIpQLSeE2xjZeF7hrQoScYuLToVRpJBIZ4eGO93ZqyZRSyMR9-qXbA/viewform?embedded=true", 
+    low : "https://docs.google.com/forms/d/e/1FAIpQLSdk0UCJGH_kUL28GPWbC4mnB_V-ZgbIABASq7zn10WiwMAsig/viewform?embedded=true"
+};
+
+
+
 
 var detectImageAudio = new Audio('./assets/audio/sample.mp3');
 var correctAnswerAudio = new Audio('./assets/audio/correct-answer.mp3');
@@ -75,7 +83,7 @@ var currentQuestion;
 var questionNumber;
 var completeNum = 0;
 var modalON = false;
-
+var correctCount = 0;
 
 
 // ナビゲーション
@@ -149,6 +157,23 @@ function setUnitResult(sentence) {
 function finish() {
     finishInfo.show();
     giftFormInfo.text("すべてのスタンプを集めました！景品に応募するには以下のフォームを入力してください");
+
+    var correctRate = correctCount / questions.length;
+    var url;
+    if (correctRate < 0.4) {
+        url = giftFormURL.low;
+        console.log("low");
+    } else if (correctRate < 0.7) {
+        url = giftFormURL.middle;
+        console.log("middle");
+    } else {
+        url = giftFormURL.high;
+        console.log("high");
+    }
+    giftForm.append(
+        `<iframe id="gift-form-high" src=${url} 
+        width="100%" height="500px" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+    `)
     giftForm.show();
 }
 
@@ -195,6 +220,7 @@ function showResults(){
         correctAnswerAudio.play();
         setUnitResult("正解");
         currentQuestion.result = true;
+        correctCount ++;
     }
     
     // 誤答時の処理
@@ -231,7 +257,7 @@ function calcRateInfo() {
         });
 
     completeRate.text('達成率: ' + completeCount + '/' + questions.length);
-    correctRate.text('正答率: ' + correctCount + '/' + completeCount);
+    correctRateInfo.text('正答率: ' + correctCount + '/' + completeCount);
 }
 
 $(".stamp-list-button").animatedModal({
