@@ -51,6 +51,13 @@ const questions = [
       correctAnswer: "ブランコ", 
       done: false, 
       result: false
+    }, 
+    {
+        question: "感想を教えてください",
+        type: "form", 
+        correctAnswer: "", 
+        done: false, 
+        result: false
     }
   ];
 
