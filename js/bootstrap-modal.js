@@ -20,7 +20,8 @@ $('#exampleModal').on('hide.bs.modal', function () {
     modalON = false;
 });
 
-const questions = [
+
+var questions = [
     {
       question: "パンはパンでも食べられないパンは？",
       type: "choice", 
@@ -60,6 +61,52 @@ const questions = [
         result: false
     }
   ];
+
+
+var userName = "default";
+var initialized = false;
+var loaded = true;
+
+
+
+function showTitle() {
+    $('#title-modal-button').click();
+    $('#title-logo').hide();
+}
+
+
+
+// ローカルストレージ
+function recordLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+    console.log('set: ' + JSON.parse(localStorage.getItem(key)));
+    }
+function readLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+
+
+
+var userInfo = {
+    init : false, 
+    name : userName, 
+};
+
+
+
+
+
+
+// window.onload = function() {
+//     showTitle();
+//   };
+
+
+
+
+
+
 
 const quizContainer = document.getElementById('quiz');
 const quizSentenceContainer = document.getElementById('quiz-sentence');
@@ -101,9 +148,7 @@ $('.nav-area').append(clone);
 // 
 
 
-function setOutput(out) {
 
-}
 
 function buildQuiz(imageNum){
 
@@ -300,6 +345,8 @@ function showResults(){
     } 
 
     submitButton.disabled = true;
+
+    recordLocalStorage("questions", questions);
 }
 
 
@@ -325,6 +372,9 @@ function calcRateInfo() {
         });
 
     var correctRate = Math.floor((correctCount / completeCount) * 100);
+    if (isNaN(correctRate)) {
+        correctRate = 0;
+    }
     completeRate.text('達成率: ' + parseInt(completeCount+completeCountForm) + '/' + questions.length);
     correctRateInfo.text('現在の正答率: ' + correctCount + '/' + completeCount + ' = ' + correctRate + '%');
 }
@@ -451,13 +501,10 @@ function count(num){
 
 
 function titleAnimation() {
-    
-    
-    count(5).then(count(6)).then(count(7)).then(count(9)).then(count(10));    
+    count(5).then(count(6)).then(count(7)).then(count(9)).then(count(12));    
 }
 
-// $('#title-modal-button').click();
-// $('#title-logo').hide();
+
 // titleAnimation();
 
 
@@ -512,14 +559,15 @@ $(".gift-form-button").animatedModal({
 
 
 
-var userName = "default";
-var initialized = false;
-var loaded = true;
+
 
 // ニックネーム
 $('#name-submit-button').on('click', function () {
     userName = $('#name-form').val();
+    userInfo.name = userName;
+    recordLocalStorage("userInfo", userInfo);
     console.log(userName);
+    $('#nav-user-name').text(userName);
 
     $('#init-container').hide();
     $('#title-logo').show();
@@ -527,15 +575,41 @@ $('#name-submit-button').on('click', function () {
     if (loaded) {
         setTimeout(() => {
             titleAnimation();
-        }, 300);
+        }, 2000);
     } 
 
     initialized = true;
 });
 
+
+// 画像の読み込み完了イベント
 window.addEventListener('arjs-nft-loaded', function(){
     if (initialized) {
         titleAnimation();
     }
     loaded = true;
-  })
+  });
+
+
+
+$('#reset-storage-button').on('click', function () {
+    localStorage.clear();
+    console.log("reset");
+});
+
+
+
+if (!localStorage.getItem("userInfo")) {
+    // 初回
+    localStorage.clear();
+    recordLocalStorage("userInfo", userInfo);
+    recordLocalStorage("questions", questions);
+    showTitle();
+    
+} else {
+    userInfo = readLocalStorage("userInfo");
+    userName = userInfo.name;
+    questions = readLocalStorage("questions");
+};
+
+$('#nav-user-name').text(userName);
