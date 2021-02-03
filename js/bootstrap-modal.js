@@ -435,3 +435,28 @@ $(".gift-form-button").animatedModal({
         calcRateInfo();
     }
 });
+
+
+
+
+
+
+  $('#google-form').submit(function (event) {
+    var field3 = $('#google-text').val();
+
+    $.ajax({
+    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYgmcPg8DdvOYCPQjWeCJtRy1b0VELJiDy7RwmHvjoQ7ihGA/formResponse",
+    data: {"entry.1012095306": field3},
+    type: "POST",
+    dataType: "xml",
+    statusCode: {
+        0: function() {
+            alert("success");
+        },
+        200: function() {
+            alert("errorMsg");
+        }
+    }
+});
+    event.preventDefault();
+});
