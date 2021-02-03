@@ -81,3 +81,15 @@ color: white;
   color: black;
   background-size: 100%;
 }
+
+.instruction {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  vertical-align: middle;
+}
+
+#quiz {
+  height: 100px;
+}

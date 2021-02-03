@@ -62,9 +62,10 @@ const questions = [
   ];
 
 const quizContainer = document.getElementById('quiz');
+const quizSentenceContainer = document.getElementById('quiz-sentence');
 const resultsContainer = document.getElementById('results');
-const submitButton = document.getElementById('submit');
-var unitResult = $('#unit-result');
+const submitButton = document.getElementById('quiz-submit-button');
+var unitResult = $('.unit-result');
 var questionTitle = $('#question-title');
 var completeRate = $('.complete-rate');
 var correctRateInfo = $('.correct-rate');
@@ -100,13 +101,20 @@ $('.nav-area').append(clone);
 // 
 
 
+function setOutput(out) {
+
+}
 
 function buildQuiz(imageNum){
 
     unitResult.css("visibility", "hidden");
+    quizContainer.innerHTML = "";
+    quizSentenceContainer.innerHTML = "";
 
     // 問題と解答の選択肢を格納する配列
     const output = [];
+    var quizSentenceOutput;
+    
 
     currentQuestion = questions[imageNum];
     questionNumber = imageNum;
@@ -124,23 +132,38 @@ function buildQuiz(imageNum){
                     <input type="radio" name="question${questionNumber}" value="${letter}" autocomplete="off">
                     <span>${currentQuestion.answers[letter]}</span>
                     </label>`
-                );
+                ); 
             };
+            
         } else if (currentQuestion.type == "text") {
             answers.push(
                 `<input class="form-control" id="textAnswerArea" placeholder="答えを入力">`
             );
+            
+        } else if (currentQuestion.type == "form") {
+
+            
+            var formTemplate = document.getElementById('form-template');
+            var clone = formTemplate.content.cloneNode(true);
+             
+            /** 要素のHTML文字列を取得 */
+            var dummy = jQuery('<div>');
+            dummy.append(clone);
+            var html = dummy.html();
+            answers.push(html);
+
         }
         
-
-        // 問題と回答を追加する
         output.push(
             `<div class="question mb-4"> ${currentQuestion.question} </div>
             <div class="answers btn-group-toggle" data-toggle="buttons"> ${answers.join('')} </div>`
         );
     
         // ページに反映する
-        quizContainer.innerHTML = output.join('');
+        var result = output.join('');
+        quizContainer.innerHTML = result;
+        
+        
         var questionIndex = parseInt(imageNum)+1;
         questionTitle.text('問題: '+ questionIndex);
 
@@ -152,6 +175,8 @@ function buildQuiz(imageNum){
         unitResult.css("visibility", "visible");
         quizContainer.innerHTML = "回答済み";
     }
+
+    $('.unit-result').css("visibility", "hidden");
 }
 
   
@@ -185,9 +210,51 @@ function finish() {
 }
 
 
+
+function sendFormData() {
+    var answer = $('#quiz-form-answer').val();
+
+    $.ajax({
+    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYgmcPg8DdvOYCPQjWeCJtRy1b0VELJiDy7RwmHvjoQ7ihGA/formResponse",
+    data: {"entry.1012095306": answer, "entry.514032089": userName},
+    type: "POST",
+    dataType: "xml",
+    statusCode: {
+        0: function() {
+            alert("success");
+        },
+        200: function() {
+            alert("errorMsg");
+        }
+    }
+});
+};
+
+
+function judgeAnswer(answer) {
+    console.log(answer);
+
+    // 正答時の処理
+    if (answer === currentQuestion.correctAnswer){
+        correctAnswerAudio.play();
+        setUnitResult("正解");
+        currentQuestion.result = true;
+        correctCount ++;
+    }
+    
+    // 誤答時の処理
+    else {
+        wrongAnswerAudio.play();
+        setUnitResult("不正解");
+        currentQuestion.result = false;
+    }
+}
+
 function showResults(){
 
     unitResult.css("visibility", "visible");
+    
+    
 
     var userAnswer;
 
@@ -208,6 +275,7 @@ function showResults(){
         // 選択中のボタンを取得するセレクターを定義
         const selector = 'input[name=question'+questionNumber+']:checked';
         userAnswer = (answerContainer.querySelector(selector) || {}).value;
+        judgeAnswer(userAnswer);
     
     } 
     else if (currentQuestion.type == "text") {
@@ -216,25 +284,11 @@ function showResults(){
             setUnitResult("回答を入力してください");
             return;
         }
+        judgeAnswer(userAnswer);
     }
-
-    
-
-    console.log(userAnswer);
-
-    // 正答時の処理
-    if (userAnswer === currentQuestion.correctAnswer){
-        correctAnswerAudio.play();
-        setUnitResult("正解");
-        currentQuestion.result = true;
-        correctCount ++;
-    }
-    
-    // 誤答時の処理
-    else {
-        wrongAnswerAudio.play();
-        setUnitResult("不正解");
-        currentQuestion.result = false;
+    else if (currentQuestion.type == "form") {
+        sendFormData();
+        setUnitResult("回答を送信しました");
     }
 
     currentQuestion.done = true;
@@ -252,19 +306,27 @@ function showResults(){
 submitButton.addEventListener('click', showResults);
 
 function calcRateInfo() {
-    var correctCount = 0;
+        var correctCount = 0;
         var completeCount = 0;
+        var completeCountWitoutFrom = 0;
+        var completeCountForm = 0;
         questions.forEach(question => {
             if (question.done) {
-                completeCount ++;
-                if (question.result) {
-                    correctCount ++;
+                if (question.type != "form") {
+                    completeCount ++;
+                    if (question.result) {
+                        correctCount ++;
+                    }
+                } else {
+                    completeCountForm ++;
                 }
+                
             }
         });
 
-    completeRate.text('達成率: ' + completeCount + '/' + questions.length);
-    correctRateInfo.text('正答率: ' + correctCount + '/' + completeCount);
+    var correctRate = Math.floor((correctCount / completeCount) * 100);
+    completeRate.text('達成率: ' + parseInt(completeCount+completeCountForm) + '/' + questions.length);
+    correctRateInfo.text('現在の正答率: ' + correctCount + '/' + completeCount + ' = ' + correctRate + '%');
 }
 
 $(".stamp-list-button").animatedModal({
@@ -386,8 +448,18 @@ function count(num){
     return dfd.promise();
   }
 
+
+
+function titleAnimation() {
+    
+    
+    count(5).then(count(6)).then(count(7)).then(count(9)).then(count(10));    
+}
+
 // $('#title-modal-button').click();
-// count(5).then(count(6)).then(count(7)).then(count(9)).then(count(10));
+// $('#title-logo').hide();
+// titleAnimation();
+
 
 
 //   $('#title-modal').addClass('zoomIn').one('animationend', function () {
@@ -440,23 +512,30 @@ $(".gift-form-button").animatedModal({
 
 
 
+var userName = "default";
+var initialized = false;
+var loaded = true;
 
-  $('#google-form').submit(function (event) {
-    var field3 = $('#google-text').val();
+// ニックネーム
+$('#name-submit-button').on('click', function () {
+    userName = $('#name-form').val();
+    console.log(userName);
 
-    $.ajax({
-    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYgmcPg8DdvOYCPQjWeCJtRy1b0VELJiDy7RwmHvjoQ7ihGA/formResponse",
-    data: {"entry.1012095306": field3},
-    type: "POST",
-    dataType: "xml",
-    statusCode: {
-        0: function() {
-            alert("success");
-        },
-        200: function() {
-            alert("errorMsg");
-        }
+    $('#init-container').hide();
+    $('#title-logo').show();
+
+    if (loaded) {
+        setTimeout(() => {
+            titleAnimation();
+        }, 300);
+    } 
+
+    initialized = true;
+});
+
+window.addEventListener('arjs-nft-loaded', function(){
+    if (initialized) {
+        titleAnimation();
     }
-});
-    event.preventDefault();
-});
+    loaded = true;
+  })
