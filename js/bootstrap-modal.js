@@ -6,67 +6,24 @@ const showModal = function () {
 };
 
 $('#exampleModal').on('show.bs.modal', function (event) {
+    // デバッグ用のボタンを押したときにそのidを取得する
     var id = $(event.relatedTarget).attr('id').substr(-1, 1);
 
     detectImageAudio.play();
     
     if (!modalON) {
         buildQuiz(id);
-        modalON = true;
     }
 });
 
 $('#exampleModal').on('hide.bs.modal', function () {
-    modalON = false;
 });
 
-
-var questions = [
-    {
-      question: "パンはパンでも食べられないパンは？",
-      type: "choice", 
-      answers: {
-        a: "あんぱん",
-        b: "クリームパン",
-        c: "フライパン"
-      },
-      correctAnswer: "c",
-      done: false, 
-      result: false
-    },
-    {
-      question: "カメとラクダとサイが買い物をしています。何を買うでしょうか？",
-      type: "choice", 
-      answers: {
-        a: "キャベツ",
-        b: "カメラ",
-        c: "ペン"
-      },
-      correctAnswer: "b", 
-      done: false, 
-      result: false
-    },
-    {
-      question: "こいでもこいでも同じところを行ったり来たりする乗り物は？",
-      type: "text", 
-      correctAnswer: "ブランコ", 
-      done: false, 
-      result: false
-    }, 
-    {
-        question: "感想を教えてください",
-        type: "form", 
-        correctAnswer: "", 
-        done: false, 
-        result: false
-    }
-  ];
 
 
 var userName = "default";
 var initialized = false;
 var loaded = true;
-
 
 
 function showTitle() {
@@ -96,18 +53,6 @@ var userInfo = {
 
 
 
-
-
-// window.onload = function() {
-//     showTitle();
-//   };
-
-
-
-
-
-
-
 const quizContainer = document.getElementById('quiz');
 const quizSentenceContainer = document.getElementById('quiz-sentence');
 const resultsContainer = document.getElementById('results');
@@ -130,9 +75,9 @@ const giftFormURL = {
 
 
 
-var detectImageAudio = new Audio('./assets/audio/sample.mp3');
-var correctAnswerAudio = new Audio('./assets/audio/correct-answer.mp3');
-var wrongAnswerAudio = new Audio('./assets/audio/wrong-answer.mp3');
+const detectImageAudio = new Audio('./assets/audio/sample.mp3');
+const correctAnswerAudio = new Audio('./assets/audio/correct-answer.mp3');
+const wrongAnswerAudio = new Audio('./assets/audio/wrong-answer.mp3');
 
 var currentQuestion;
 var questionNumber;
@@ -141,36 +86,35 @@ var modalON = false;
 var correctCount = 0;
 
 
-// ナビゲーション
+// ナビゲーションバー
 var navTemplate = document.getElementById('nav-template');
 var clone = navTemplate.content.cloneNode(true);
 $('.nav-area').append(clone);
-// 
+// ------
 
 
+function resetQuizArea() {
+    unitResult.css("visibility", "hidden");
+    quizContainer.innerHTML = "";
+}
 
 
 function buildQuiz(imageNum){
 
-    unitResult.css("visibility", "hidden");
-    quizContainer.innerHTML = "";
-    quizSentenceContainer.innerHTML = "";
-
-    // 問題と解答の選択肢を格納する配列
-    const output = [];
-    var quizSentenceOutput;
-    
+    resetQuizArea();
 
     currentQuestion = questions[imageNum];
     questionNumber = imageNum;
 
+    // 問題と解答の選択肢を格納する配列
+    const output = [];
+    
     if (!currentQuestion.done) {
         // 選択肢を格納する配列
-        const answers = [];
+        var answers = [];
 
         if (currentQuestion.type == "choice") {
             for(letter in currentQuestion.answers){
-                // ラジオボタンを作成する
                 answers.push(
                     `<label class="btn btn-outline-primary mx-2 option my-1 optionButton" style="text-align: center;
                     width: 55%;">
@@ -186,12 +130,9 @@ function buildQuiz(imageNum){
             );
             
         } else if (currentQuestion.type == "form") {
-
-            
             var formTemplate = document.getElementById('form-template');
             var clone = formTemplate.content.cloneNode(true);
              
-            /** 要素のHTML文字列を取得 */
             var dummy = jQuery('<div>');
             dummy.append(clone);
             var html = dummy.html();
@@ -217,16 +158,16 @@ function buildQuiz(imageNum){
     }
     // 回答済みの場合の処理
     else {
-        unitResult.css("visibility", "visible");
+        unitResult.css("visibility", "hidden");
         quizContainer.innerHTML = "回答済み";
+        submitButton.disabled = true;
     }
 
-    $('.unit-result').css("visibility", "hidden");
+    
+    
 }
 
   
-
-
 function setUnitResult(sentence) {
     unitResult.text(sentence);
 }
@@ -237,6 +178,7 @@ function finish() {
 
     var correctRate = correctCount / questions.length;
     var url;
+    // todo: urlを切り替えるのではなくスコアをhiddenで送信するようにする
     if (correctRate < 0.4) {
         url = giftFormURL.low;
         console.log("low");
@@ -262,6 +204,28 @@ function sendFormData() {
     $.ajax({
     url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYgmcPg8DdvOYCPQjWeCJtRy1b0VELJiDy7RwmHvjoQ7ihGA/formResponse",
     data: {"entry.1012095306": answer, "entry.514032089": userName},
+    type: "POST",
+    dataType: "xml",
+    statusCode: {
+        0: function() {
+            alert("success");
+        },
+        200: function() {
+            alert("errorMsg");
+        }
+    }
+});
+};
+
+
+function sendSurveyFormData() {
+    var hs1 = $('#hs-1').val();
+    var hs2 = $('#hs-2').val();
+
+
+    $.ajax({
+    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYgmcPg8DdvOYCPQjWeCJtRy1b0VELJiDy7RwmHvjoQ7ihGA/formResponse",
+    data: {"entry.1012095306": hs1, "entry.514032089": hs2},
     type: "POST",
     dataType: "xml",
     statusCode: {
@@ -332,7 +296,7 @@ function showResults(){
         judgeAnswer(userAnswer);
     }
     else if (currentQuestion.type == "form") {
-        sendFormData();
+        // sendFormData();
         setUnitResult("回答を送信しました");
     }
 
@@ -380,10 +344,10 @@ function calcRateInfo() {
 }
 
 $(".stamp-list-button").animatedModal({
-    animatedIn:'bounceInUp',
-    animatedOut:'bounceOutDown',
+    animatedIn:'fadeIn',
+    animatedOut:'fadeOut',
     color:'white',
-    animationDuration:'.7s',
+    animationDuration:'.5s',
     beforeOpen: function() {
         $('.close-gift-form-modal').click();
 
@@ -412,17 +376,6 @@ $(".stamp-list-button").animatedModal({
 
         addClassNextChild();
 
-        // 0202
-        // var stampListText = $('.stamp-list-text');
-        // stampListText.each(function(index, element){
-        //     $(element).text(questions[index].question);
-        //     if (questions[index].done) {
-                
-        //     } else {
-                
-        //     } 
-        // })
-        // ---
 
     },
     afterClose: function() {
@@ -433,6 +386,8 @@ $(".stamp-list-button").animatedModal({
 
 
 // 0202
+
+
 // タイトル画面
 
 function setAnimation(element, anim) {
@@ -545,10 +500,10 @@ for (var i=0; i<questions.length; i++) {
 
 // gift form
 $(".gift-form-button").animatedModal({
-    animatedIn:'bounceInUp',
-    animatedOut:'bounceOutDown',
+    animatedIn:'fadeIn',
+    animatedOut:'fadeOut',
     color:'white',
-    animationDuration:'.7s',
+    animationDuration:'.5s',
     beforeOpen: function () {
         $('.close-stamp-list-modal').click();
         calcRateInfo();
@@ -613,3 +568,7 @@ if (!localStorage.getItem("userInfo")) {
 };
 
 $('#nav-user-name').text(userName);
+
+// window.onload = function() {
+//     showTitle();
+//   };

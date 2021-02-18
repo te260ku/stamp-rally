@@ -1,152 +1,146 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/animate.min.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>bootstrap</title>
-  </head>
-<style>
-    .choice {
-        width: 30%;
-    }
-</style>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <!--  -->
+  <!-- フォント -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+  <!--  -->
+  <link rel="stylesheet" href="./css/animate.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+
+  <title>stamp-rally</title>
+</head>
+
+
 <body class="m-auto w-100" style="margin : 0px; overflow: hidden;">
 
-    <!-- 0202 -->
-    <a id="title-modal-button" href="#title-modal" style="display: none;">Open Title Modal</a>
+  <!-- 0202 -->
 
-    
-    <div id="title-modal">
-        <div class="close-title-modal" style="display: none;"> 
-            Close Title Modal
-        </div>
 
-             <div class="container h-100">
-              <div class="row align-items-center h-100">
-                  <div class="col-6 mx-auto text-center">
+  <a id="title-modal-button" href="#title-modal" style="display: none;">
+    Open Title Modal
+  </a>
 
-                      <div id="title-container">
-                        
-                        <div id="title-logo">
-                        <img src="./assets/images/stamp-2.png" class="img-fluid mb-3 w-25">
-                        <h1 class="title">Stamp Rally</h1>
-                        <div class="text-center mt-4 animated title-loading">
-                          <div class="spinner-border text-white" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
-                        </div>
-                      </div>
+  <!-- タイトルモーダル -->
+  <div id="title-modal">
+      <div class="close-title-modal" style="display: none;"> 
+          Close Title Modal
+      </div>
+      <div class="container h-100">
+        <div class="row align-items-center h-100">
+          <div class="col-6 mx-auto text-center">
 
-                      <div id="init-container">
-                        <div>
-                        <div class="text-center mt-4">
-                          <p class="text-center h-25 instruction" style="font-size: 15px;">ニックネームを入力してください</p>  
-                        </div>
-                        <div class="mb-3">
-              
-                          <input class="form-control" id="name-form">
-                        </div>
+            <div id="title-container">
 
-                        <button id="name-submit-button" type="button" class="btn btn-light"><span style="color: gray;">決定</span></button>
-                        
-                      </div>
-
-                      
-                    </div>
-                    <div id="loaded-message">
-                      <p class="text-center h-25">Hello</p>
-                    </div>
-                      
+              <!-- ロゴ表示画面 -->
+              <div id="title-logo">
+                <img src="./assets/images/stamp-2.png" class="img-fluid mb-3 w-25">
+                <h1 class="title">Stamp Rally</h1>
+                <div class="text-center mt-4 animated title-loading">
+                  <div class="spinner-border text-white" role="status">
+                    <span class="visually-hidden">Loading...</span>
                   </div>
-
-                  
+                </div>
               </div>
-          </div>
-    </div>
-  </div>
 
+              <!-- ユーザー名入力画面 -->
+              <div id="init-container">
+                <div class="text-center mt-4">
+                  <p class="text-center h-25 instruction" style="font-size: 15px;">ニックネームを入力してください</p>  
+                </div>
+                <div class="mb-3">
+                  <input class="form-control" id="name-form">
+                </div>
+                <button id="name-submit-button" type="button" class="btn btn-light"><span style="color: gray;">決定</span></button> 
+              </div>
 
-    <!-- stamp list template-->
-    <template id="stamp-list-template">
-      <div class="col">
-        <div class="card h-100 thumb">
-            <div class="image-wrapper">
-          <img src="./assets/images/thumbnail.png" class="card-img-top" alt="...">
-          
-          </div>
-          <div class="card-body">
-            <h5 class="card-title stamp-list-title">問題: 1</h5>
-            <p class="card-text stamp-list-text">This content is a little bit longer.</p>
+              <!-- ロード完了画面 -->
+              <div id="loaded-message">
+                <p class="text-center h-25">Hello</p>
+              </div>
+                  
+            </div>
           </div>
         </div>
       </div>
-    </template>
-    <!--  -->
+  </div>
+  <!--  -->
+
+
+  <!-- スタンプリストテンプレート -->
+  <template id="stamp-list-template">
+    <div class="col">
+      <div class="card h-100 thumb">
+        <div class="image-wrapper">
+          <!-- todo: 画像のソースを問題に応じて変更する -->
+          <img src="./assets/images/thumbnail.png" class="card-img-top">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title stamp-list-title"></h5>
+          <p class="card-text stamp-list-text"></p>
+        </div>
+      </div>
+    </div>
+  </template>
+  <!--  -->
 
     
-    <!-- nav template -->
-    <template id="nav-template">
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <span class="navbar-brand p-2">
-          Stamp Rally
-        </span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu2a" aria-controls="navmenu2a" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navmenu2a">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link stamp-list-button" href="#stamp-list-modal">
-              スタンプ一覧
-            </a>
-            <a class="nav-item nav-link gift-form-button" href="#gift-form-modal">
-              景品応募フォーム
-            </a>
-            <a class="nav-item nav-link" id="switch-image-test-button">
-              show/hide
-            </a>
-          </div>
+  <!-- ナビゲーションテンプレート -->
+  <template id="nav-template">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <span class="navbar-brand p-2">
+        Stamp Rally
+      </span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu2a" aria-controls="navmenu2a" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu2a">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link stamp-list-button" href="#stamp-list-modal">
+            スタンプ一覧
+          </a>
+          <a class="nav-item nav-link gift-form-button" href="#gift-form-modal">
+            景品応募フォーム
+          </a>
+          <a class="nav-item nav-link" id="switch-image-test-button">
+            show/hide
+          </a>
         </div>
-      </nav>
-    </template>
-
-
-
-
-
-    <!-- googleフォーム template -->
-      
-      <template id="form-template">
-      <form id="quiz-form" 
-            class="p-0"
-            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYgmcPg8DdvOYCPQjWeCJtRy1b0VELJiDy7RwmHvjoQ7ihGA/formResponse">
-        <div>
-          
-
-            <textarea name="entry.1012095306" id="quiz-form-answer" 
-                      class="form-control p-2" placeholder="答えを入力" 
-                      ></textarea>
-            
-          
-        </div>
-        <div class="unit-result alert alert-primary" role="alert">  
-        </div>
-        
-      </form>
-
-      
+      </div>
+    </nav>
   </template>
+  <!--  -->
 
 
+  <!-- googleフォームテンプレート -->
+  <template id="form-template">
+    <form id="quiz-form" 
+          class="p-0"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYgmcPg8DdvOYCPQjWeCJtRy1b0VELJiDy7RwmHvjoQ7ihGA/formResponse">
+      <div>
+        <textarea name="entry.1012095306"
+                  id="quiz-form-answer" 
+                  class="form-control p-2" 
+                  placeholder="答えを入力" >
+        </textarea>
+      </div>
+        <div class="unit-result alert alert-primary" role="alert">  
+      </div>
+    </form>
+  </template>
+  <!--  -->
 
+
+  <!--  -->
   <template id="option-template">
     <label class="btn btn-outline-primary mx-2 option my-1 optionButton" style="text-align: center;
                     width: 55%;">
@@ -154,13 +148,7 @@
                     <span></span>
                     </label>
   </template>
-    
-
-    <!--  -->
-
-
-
-
+  <!--  -->
 
 
 
@@ -206,98 +194,77 @@
       
 
 
-      <!-- 0202 -->
-      <!-- gift form modal -->
-    <div id="gift-form-modal">
-      <div class="nav-area"></div>
+  
+  <!-- 景品応募フォームモーダル -->
+  <div id="gift-form-modal">
+    <div class="nav-area"></div>
 
+      <div class="py-4 alert alert-primary text-center" role="alert">
+        <p>景品応募フォーム</p>
+        <button type="button" class="btn-close close-gift-form-modal" aria-label="Close"></button>
+      </div>
 
-        <div class="py-4 alert alert-primary text-center" role="alert">
-          <p>景品応募フォーム</p>
-          
-          <button type="button" class="btn-close close-gift-form-modal" aria-label="Close"></button>
+      <div class="container">
+        <div class="col-md-8 col-sm-8 m-auto">
+          <div class="alert alert-info mt-3" role="alert">
+            <div class="complete-rate py-1">/</div>
+            <div class="correct-rate py-1">/</div>
         </div>
 
-
-        <div class="container">
-
-          <div class="col-md-8 col-sm-8 m-auto">
-
-            <div class="alert alert-info mt-3" role="alert">
-              <div class="complete-rate py-1">/</div>
-              <div class="correct-rate py-1">/</div>
-          </div>
-
-          <div class="alert alert-danger mt-3 gift-form-info" role="alert">
-              <p class="my-0"> スタンプを集めてください
-              </p>
-          </div>
-
-              
-            <div class="row">
-
-              <div class="container gift-form">
-                
-              
-              </div>
-
-              
-            </div>
-
-
+        <div class="alert alert-danger mt-3 gift-form-info" role="alert">
+            <p class="my-0"> スタンプを集めてください
+            </p>
         </div>
+ 
+        <div class="row">
+          <div class="container gift-form"></div>
         </div>
 
-    </div> 
-    <!--  -->
+        </div>
+      </div>
+
+  </div> 
+  <!--  -->
 
 
- <!-- stamp-list-modal -->
-    <div id="stamp-list-modal">
-      <div class="nav-area"></div>
-        <div class="py-4 alert alert-primary text-center" role="alert">
-          <p>スタンプ一覧</p>
-          
-          <button type="button" class="btn-close close-stamp-list-modal" aria-label="Close"></button>
+  <!-- スタンプリストモーダル -->
+  <div id="stamp-list-modal">
+    <div class="nav-area"></div>
+
+    <div class="py-4 alert alert-primary text-center" role="alert">
+      <p>スタンプ一覧</p>
+      <button type="button" class="btn-close close-stamp-list-modal" aria-label="Close"></button>
+    </div>
+
+    <div class="container">
+      <div class="col-md-8 col-sm-8 m-auto text-center">
+
+        <div class="alert alert-info mt-3" role="alert">
+            <div class="complete-rate py-1">/</div>
+            <div class="correct-rate py-1">/</div>
         </div>
 
-
-        <div class="container">
-
-          <div class="col-md-8 col-sm-8 m-auto text-center">
-
-            <div class="alert alert-info mt-3" role="alert">
-                <div class="complete-rate py-1">/</div>
-                <div class="correct-rate py-1">/</div>
-            </div>
-
-            
-
-            <div class="alert alert-danger mt-3 finish-info"role="alert">
-                <p class="my-0"> すべてのスタンプを集めました！
-                    景品の抽選に応募するには必要な情報をフォームに入力してください
-                </p>
-                
-                <button class="btn btn-primary gift-form-button mb-4" href="#gift-form-modal">
-                  景品応募フォーム
-                </button>
-            </div>
-              
-            <div class="row row-cols-2 row-cols-md-2 g-4" id="stamp-list">
-            
-            </div>
-
-
-        </div>
+        <div class="alert alert-danger mt-3 finish-info"role="alert">
+            <p class="my-0">
+                すべてのスタンプを集めました！
+                景品の抽選に応募するには必要な情報をフォームに入力してください
+            </p>            
+            <button class="btn btn-primary gift-form-button mb-4" href="#gift-form-modal">
+              景品応募フォーム
+            </button>
         </div>
 
-    </div> 
-<!--  -->
+        <div class="row row-cols-2 row-cols-md-2 g-4" id="stamp-list"></div>
+      </div>
+    </div>
+  </div> 
+  <!--  -->
 
 
-    <div class="container mt-3">
+  <!-- デバッグ用ボタン -->
+  <div class="container mt-3">
     <button id="q0" type="button" class="btn btn-primary image-test-button" data-toggle="modal" data-target="#exampleModal">
-        画像1
+      画像1
     </button>
     <button id="q1" type="button" class="btn btn-primary image-test-button" data-toggle="modal" data-target="#exampleModal">
       画像2
@@ -308,51 +275,50 @@
     <button id="q3" type="button" class="btn btn-primary image-test-button" data-toggle="modal" data-target="#exampleModal">
       画像4
     </button>
-    </div>
+  </div>
+  <!--  -->
  
 
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- 問題モーダル -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-fluid">
-        <div class="modal-content">
+      <div class="modal-content">
+
         <div class="modal-header">
             <h5 class="modal-title font-weight-bold" id="question-title"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-              </button>
+            </button>
         </div>
+
         <div class="modal-body text-center p-5">
           <div id="quiz-sentence"></div>
-            <div id="quiz"></div>
-            <div id="results"></div>
-           
+          <div id="quiz"></div>
+          <div id="results"></div>  
         </div>
+
         <div class="justify-content-center mb-3 text-center">
-
-            
-            <div class="unit-result mt-3 alert alert-primary" role="alert">
-                
-            </div>
-
-            <button id="quiz-submit-button" type="button" class="btn btn-primary mt-3 rounded-pill">　回答　</button>
-
-
+          <div class="unit-result mt-3 alert alert-primary" role="alert"></div>
+          <button id="quiz-submit-button" type="button" class="btn btn-primary mt-3 rounded-pill">　回答　</button>
         </div>
-        </div>
+
+      </div>
     </div>
-    </div>
+  </div>
+  <!--  -->
   
+
+
   <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> -->
-<script src="js/animatedModal.min.js"></script>
-<script src="./js/plugin.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> -->
+  <script src="js/animatedModal.min.js"></script>
+  <script src="./js/plugin.js"></script>
+  <script src="./js/question-data.js"></script>
   <script src="./js/bootstrap-modal.js"></script>
 
-  </body>
+</body>
 </html>

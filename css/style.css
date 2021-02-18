@@ -93,3 +93,11 @@ color: white;
 #quiz {
   height: 100px;
 }
+
+.choice {
+  width: 30%;
+}
+
+.unit-result {
+  margin-top: 50px;
+}
