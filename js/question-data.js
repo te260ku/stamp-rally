@@ -12,29 +12,39 @@ var questions = [
       result: false
     },
     {
-      question: "カメとラクダとサイが買い物をしています。何を買うでしょうか？",
+      question: "パンはパンでも食べられないパンは？",
       type: "choice", 
       answers: {
-        a: "キャベツ",
-        b: "カメラ",
-        c: "ペン"
+        a: "あんぱん",
+        b: "クリームパン",
+        c: "フライパン"
       },
-      correctAnswer: "b", 
+      correctAnswer: "c",
       done: false, 
       result: false
     },
     {
-      question: "こいでもこいでも同じところを行ったり来たりする乗り物は？",
-      type: "text", 
-      correctAnswer: "ブランコ", 
+      question: "パンはパンでも食べられないパンは？",
+      type: "choice", 
+      answers: {
+        a: "あんぱん",
+        b: "クリームパン",
+        c: "フライパン"
+      },
+      correctAnswer: "c",
       done: false, 
       result: false
-    }, 
+    },
     {
-        question: "感想を教えてください",
-        type: "form", 
-        correctAnswer: "", 
-        done: false, 
-        result: false
-    }
+      question: "パンはパンでも食べられないパンは？",
+      type: "choice", 
+      answers: {
+        a: "あんぱん",
+        b: "クリームパン",
+        c: "フライパン"
+      },
+      correctAnswer: "c",
+      done: false, 
+      result: false
+    },
   ];

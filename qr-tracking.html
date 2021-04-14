@@ -25,7 +25,10 @@
 
 
 
-    <script src="./js/image-tracking-script.js"></script>
+    
+    <script src="./js/qr-tracking-script.js"></script>
+
+    
 
 
 <body class="m-auto w-100" style="margin : 0px; overflow: hidden;">
@@ -186,46 +189,29 @@
 
 
 
+
     <div style="margin : 0px; overflow: hidden;">
-    <a-scene embedded arjs
-        vr-mode-ui="enabled: false;"
-        renderer="logarithmicDepthBuffer: true;"
-        embedded
-        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-    >
-        
-        <a-nft
-            id="road" 
-            type="nft"
-            url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/te260ku/stamp-rally/main/assets/nft/test"
-            smooth="true"
-            smoothCount="10"
-            smoothTolerance=".01"
-            smoothThreshold="5" 
-            registerevents
-        >
+        <a-scene embedded arjs="debugUIEnabled:false;">
+            <a-entity camera></a-entity>
+    
             
-        </a-nft>
-
-        <a-nft
-            id="trex" 
-            type="nft"
-            url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
-            smooth="true"
-            smoothCount="10"
-            smoothTolerance=".01"
-            smoothThreshold="5" 
-            registerevents
-        >
-            
-        </a-nft>
-
-
-        <a-entity camera></a-entity>
-    </a-scene>
+            <a-marker 
+                id="1" 
+                preset="custom" 
+                type="pattern" 
+                url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/te260ku/stamp-rally/main/assets/markers/qr"
+                registerevents 
+            >
+                
+    
+            </a-marker>
+        </a-scene>
+    
+    
+        </div>
 
 
-    </div>
+
 
 
 

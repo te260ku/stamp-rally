@@ -49,6 +49,6 @@ $('#finish-button').on('click', function () {
     $('#survey-form').hide();
     $('#end-container').hide();
 
-    window.location.href = '/opinion-survey.html';
+    window.location.href = './bootstrap-modal.html';
 });
 

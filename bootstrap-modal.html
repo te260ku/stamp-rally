@@ -43,7 +43,7 @@
 
               <!-- ロゴ表示画面 -->
               <div id="title-logo">
-                <img src="./assets/images/stamp-2.png" class="img-fluid mb-3 w-25">
+                <img src="./assets/images/stamp.png" class="img-fluid mb-3 w-25">
                 <h1 class="title">Stamp Rally</h1>
                 <div class="text-center mt-4 animated title-loading">
                   <div class="spinner-border text-white" role="status">
@@ -65,7 +65,7 @@
 
               <!-- ロード完了画面 -->
               <div id="loaded-message">
-                <p class="text-center h-25">Hello</p>
+                <img src="./assets/images/stamp.png" class="img-fluid mb-3 w-25">
               </div>
                   
             </div>
@@ -81,8 +81,7 @@
     <div class="col">
       <div class="card h-100 thumb">
         <div class="image-wrapper">
-          <!-- todo: 画像のソースを問題に応じて変更する -->
-          <img src="./assets/images/thumbnail.png" class="card-img-top">
+          <!-- <img src="./assets/images/thumbnail.png" class="card-img-top"> -->
         </div>
         <div class="card-body">
           <h5 class="card-title stamp-list-title"></h5>
@@ -97,16 +96,18 @@
   <!-- ナビゲーションテンプレート -->
   <template id="nav-template">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <span class="navbar-brand p-2">
-        Stamp Rally
-      </span>
+      <a type="button" class="nav-title">
+        <span class="navbar-brand p-2">Stamp Rally</span>
+      </button>
+      
+    </button>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu2a" aria-controls="navmenu2a" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navmenu2a">
         <div class="navbar-nav">
           <a class="nav-item nav-link stamp-list-button" href="#stamp-list-modal">
-            スタンプ一覧
+            回答確認
           </a>
           <a class="nav-item nav-link gift-form-button" href="#gift-form-modal">
             景品応募フォーム
@@ -139,6 +140,92 @@
   </template>
   <!--  -->
 
+  <!-- ----------------------- -->
+  <!-- 景品応募フォームテンプレート -->
+  <template id="gift-form-template">
+    <!-- <div id="gift-form-original"> -->
+    <form 
+      id="gift-form-original" 
+      class="p-0"
+      action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScBVMt357SMiS37tOAl9bGR7J2formC1e6U4pFZ6zvIoAuorQ/formResponse"
+    >
+    
+      <div class="mb-3">
+        <label class="form-label">name</label>
+        <input id="gift-name" type="name" class="form-control" name="entry.2005620554">
+        
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">email</label>
+        <input id="gift-email" type="email" class="form-control" name="entry.1045781291">
+      </div>
+
+
+
+      <option data-value="" value=""></option>
+
+
+      <div class="mb-3">
+        <label class="form-label">フェスティバルへの参加は何回目ですか？</label>
+        
+        <select id="gift-q1" class="form-select" name="entry.1062340692">
+          <option data-value="初めて" value="初めて">初めて</option>
+          <option data-value="2～5回" value="2～5回">2～5回</option>
+          <option data-value="6～9回" value="6～9回">6～9回</option>
+          <option data-value="10回以上" value="10回以上">10回以上</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">イベントの主催団体である連合群馬西部地協をご存知でしたか？</label>
+        
+        <select id="gift-q2" class="form-select" name="entry.2047581584">
+          <option data-value="知っていた" value="知っていた">知っていた</option>
+          <option data-value="聞いたことはあった" value="聞いたことはあった">聞いたことはあった</option>
+          <option data-value="知らなかった" value="知らなかった">知らなかった</option>
+
+        </select>
+      </div>
+
+      <div class="mb-3">
+        
+        <label class="form-label">例年のイベント（模擬店やキャラクターショー等）と今回のイベントではどちらが良いですか？</label>
+        			
+	
+        <select id="gift-q3" class="form-select" name="entry.973971448">
+          <option data-value="例年のイベント" value="例年のイベント">例年のイベント</option>
+          <option data-value="今回のイベント" value="今回のイベント">今回のイベント</option>
+          <option data-value="どちらも良い" value="どちらも良い">どちらも良い</option>
+          <option data-value="別のイベントが良い" value="別のイベントが良い">別のイベントが良い</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">イベントの感想や連合群馬に対する要望等ございましたら、ご自由に記入ください。</label>
+        <textarea name="entry.1716794980"
+                  id="gift-q4" 
+                  class="form-control" 
+                  value="" 
+                  placeholder="回答を入力" >
+        </textarea>
+      </div>
+
+      
+
+      
+      <input type="hidden" name="entry.1780406021" value="">
+      
+      
+      
+    </form>
+    <button id="gift-form-submit-button" class="btn btn-primary mt-3">Submit</button>
+  <!-- </div> -->
+  </template>  
+  <!-- ----------------------- -->
+  
+
+
 
   <!--  -->
   <template id="option-template">
@@ -154,11 +241,12 @@
 
 
 
-
+  <div id="global-nav-area"></div>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <span class="navbar-brand p-2">
-        Stamp Rally
-      </span>
+      <a id="navbar-title" href="">
+        <span class="navbar-brand p-2">
+          Stamp Rally
+        </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu2a" aria-controls="navmenu2a" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -166,7 +254,7 @@
 
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link stamp-list-button" href="#stamp-list-modal">
-            スタンプ一覧
+            回答確認
           <a class="nav-item nav-link gift-form-button" href="#gift-form-modal">
             景品応募フォーム
           </a>
@@ -181,9 +269,9 @@
 
         <div class="navbar-nav">
           
-          <span id="nav-user-name" class="navbar-text pr-3">
+          <!-- <span id="nav-user-name" class="navbar-text pr-3">
             user name
-          </span>
+          </span> -->
         </div>
       </div>
     </nav>
@@ -202,17 +290,18 @@
       <div class="py-4 alert alert-primary text-center" role="alert">
         <p>景品応募フォーム</p>
         <button type="button" class="btn-close close-gift-form-modal" aria-label="Close"></button>
+        
       </div>
 
       <div class="container">
         <div class="col-md-8 col-sm-8 m-auto">
           <div class="alert alert-info mt-3" role="alert">
             <div class="complete-rate py-1">/</div>
-            <div class="correct-rate py-1">/</div>
+            <!-- <div class="correct-rate py-1">/</div> -->
         </div>
 
         <div class="alert alert-danger mt-3 gift-form-info" role="alert">
-            <p class="my-0"> スタンプを集めてください
+            <p class="my-0"> クイズに回答してください
             </p>
         </div>
  
@@ -232,7 +321,7 @@
     <div class="nav-area"></div>
 
     <div class="py-4 alert alert-primary text-center" role="alert">
-      <p>スタンプ一覧</p>
+      <p>回答確認</p>
       <button type="button" class="btn-close close-stamp-list-modal" aria-label="Close"></button>
     </div>
 
@@ -241,18 +330,20 @@
 
         <div class="alert alert-info mt-3" role="alert">
             <div class="complete-rate py-1">/</div>
-            <div class="correct-rate py-1">/</div>
+            <!-- <div class="correct-rate py-1">/</div> -->
         </div>
 
         <div class="alert alert-danger mt-3 finish-info"role="alert">
             <p class="my-0">
-                すべてのスタンプを集めました！
+                すべてのクイズに回答しました！
                 景品の抽選に応募するには必要な情報をフォームに入力してください
             </p>            
             <button class="btn btn-primary gift-form-button mb-4" href="#gift-form-modal">
               景品応募フォーム
             </button>
         </div>
+
+        <button id="confirm-answer-button" class="btn btn-primary mb-4">回答を確定する</button>
 
         <div class="row row-cols-2 row-cols-md-2 g-4" id="stamp-list"></div>
       </div>
@@ -306,6 +397,14 @@
     </div>
   </div>
   <!--  -->
+
+
+
+  <!-- ar.js -->
+  <!-- ----------------------- -->
+
+  <!-- ----------------------- -->
+  
   
 
 

@@ -36,16 +36,7 @@ AFRAME.registerComponent('registerevents', {
           
           console.log("found: " + markerId);
 
-          switch (markerId) {
-            case "trex":
-              showModal(0);
-              break;
-            case "road":
-              showModal(1);
-              break;
-            default:
-              break;
-          }
+          showModal(markerId-1);
         });
 
         // マーカーを見失ったイベントの登録
