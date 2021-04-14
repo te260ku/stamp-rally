@@ -25,6 +25,12 @@ var userName = "default";
 var initialized = false;
 var loaded = true;
 
+var userInfo = {
+    init : false, 
+    name : userName, 
+    complete: false, 
+};
+
 
 function showTitle() {
     $('#title-modal-button').click();
@@ -46,11 +52,7 @@ function readLocalStorage(key) {
 
 
 
-var userInfo = {
-    init : false, 
-    name : userName, 
-    complete: false, 
-};
+
 
 
 
@@ -187,6 +189,10 @@ function finish() {
     finishInfo.show();
     giftFormInfo.text("すべてのクイズに回答しました！景品に応募するには以下のフォームを入力してください");
 
+    $('.stamp-reset-button').addClass('disabled');
+    $('#confirm-answer-button').addClass('disabled');
+
+
     var correctRate = correctCount / questions.length;
     var url;
     if (correctRate < 0.4) {
@@ -292,11 +298,12 @@ function sendSurveyFormData() {
 
 function judgeAnswer(answer) {
     console.log(answer);
+    currentQuestion.answer = answer;
 
     // 正答時の処理
     if (answer === currentQuestion.correctAnswer){
         // correctAnswerAudio.play();
-        setUnitResult("正解");
+        setUnitResult("回答を記録しました");
         currentQuestion.result = true;
         correctCount ++;
     }
@@ -304,7 +311,7 @@ function judgeAnswer(answer) {
     // 誤答時の処理
     else {
         // wrongAnswerAudio.play();
-        setUnitResult("不正解");
+        setUnitResult("回答を記録しました");
         currentQuestion.result = false;
     }
 }
@@ -347,7 +354,7 @@ function showResults(){
     }
     else if (currentQuestion.type == "form") {
         // sendFormData();
-        setUnitResult("回答を送信しました");
+        setUnitResult("回答を記録しました");
     }
 
     currentQuestion.done = true;
@@ -497,14 +504,19 @@ switchImageTestButtons.addEventListener('click', function () {
 
 // template
 var stampListTemplate = document.getElementById('stamp-list-template');
+
 for (var i=0; i<questions.length; i++) {
     
     var clone = stampListTemplate.content.cloneNode(true);
     var tmp = i+1;
     clone.querySelector('.stamp-list-title').textContent = 'Q' + tmp + '.';
     clone.querySelector('.stamp-list-text').textContent = questions[i].question;
-    document.getElementById('stamp-list').appendChild(clone)   
+    $(clone).find('.stamp-reset-button').addClass('stamp-reset-button-'+i);
+    document.getElementById('stamp-list').appendChild(clone)
 };
+var stampComponents = $('.stamp-component');
+var stampStateBudge = $('.stamp-status-budge')
+var stampAnswerBudge = $('.stamp-answer-budge')
 
 
 
@@ -521,7 +533,29 @@ $(".gift-form-button").animatedModal({
 });
 
 
+function updateStampBudge() {
+    for (i=0; i<stampComponents.length; i++) {
+        
 
+        var s = stampStateBudge[i];
+        var res_s = "";
+        var a = stampAnswerBudge[i];
+        var res_a = questions[i].answer;
+
+        if (questions[i].done) {
+            res_s = "回答済み";
+            s.className = "badge bg-primary stamp-status";
+            res_a = '回答: ' + questions[i].answer;
+        } else {
+            res_s = "未回答";
+            s.className = "badge bg-danger stamp-status";
+            res_a = "回答: ";
+        }
+        s.innerHTML = res_s;
+        a.innerHTML = res_a;
+
+    }
+}
 
 $(".stamp-list-button").animatedModal({
     animatedIn:'fadeIn',
@@ -534,6 +568,10 @@ $(".stamp-list-button").animatedModal({
 
         var children = $(".thumb");
         var images = document.querySelectorAll('.card-img-top');
+
+
+        updateStampBudge();
+        
         
         var index = 0;
 
@@ -633,7 +671,7 @@ if (!localStorage.getItem("userInfo")) {
     questions = readLocalStorage("questions");
 
     completeCount = getCompleteCount();
-    if (completeCount >= questions.length) {
+    if (readLocalStorage("userInfo").complete) {
         finish();
     }
     
@@ -656,6 +694,14 @@ function getCompleteCount() {
     return count;
 }
 
+function resetAnswer(num) {
+    var q = questions[num];
+    q.answer = "";
+    q.done = false;
+    q.result = false;
+    recordLocalStorage("questions", questions);
+    
+}
 
 
 $('.nav-title').on('click', function () {
@@ -665,9 +711,24 @@ $('.nav-title').on('click', function () {
 });
 
 $('#confirm-answer-button').on('click', function () {
-    if (completeNum >= questions.length) {
+    
+    if (getCompleteCount() >= questions.length) {
         finish();
+        userInfo.complete = true;
+        recordLocalStorage("userInfo", userInfo);
+        
     } else {
         alert('すべてのクイズに回答してください');
     }
+});
+
+$('.stamp-reset-button').on('click', function () {
+    var classes = $(this).attr("class").split(' ');
+    var num = classes[3].split('-')[3];
+    
+    resetAnswer(num);
+    
+    updateStampBudge();
+        
+    
 });

@@ -78,7 +78,7 @@
 
   <!-- スタンプリストテンプレート -->
   <template id="stamp-list-template">
-    <div class="col">
+    <div class="col stamp-component">
       <div class="card h-100 thumb">
         <div class="image-wrapper">
           <!-- <img src="./assets/images/thumbnail.png" class="card-img-top"> -->
@@ -86,7 +86,12 @@
         <div class="card-body">
           <h5 class="card-title stamp-list-title"></h5>
           <p class="card-text stamp-list-text"></p>
+          <span class="badge bg-primary stamp-status-budge">回答済み</span>
+          <span class="badge bg-primary stamp-answer-budge">回答: </span>
+          <div class="my-2"><button type="button" class="btn btn-primary stamp-reset-button"><span>リセット</span></button></div>
+          
         </div>
+        
       </div>
     </div>
   </template>
@@ -140,10 +145,11 @@
   </template>
   <!--  -->
 
+
+
   <!-- ----------------------- -->
   <!-- 景品応募フォームテンプレート -->
   <template id="gift-form-template">
-    <!-- <div id="gift-form-original"> -->
     <form 
       id="gift-form-original" 
       class="p-0"
@@ -153,7 +159,6 @@
       <div class="mb-3">
         <label class="form-label">name</label>
         <input id="gift-name" type="name" class="form-control" name="entry.2005620554">
-        
       </div>
 
       <div class="mb-3">
@@ -161,11 +166,7 @@
         <input id="gift-email" type="email" class="form-control" name="entry.1045781291">
       </div>
 
-
-
-      <option data-value="" value=""></option>
-
-
+      
       <div class="mb-3">
         <label class="form-label">フェスティバルへの参加は何回目ですか？</label>
         
@@ -179,20 +180,15 @@
 
       <div class="mb-3">
         <label class="form-label">イベントの主催団体である連合群馬西部地協をご存知でしたか？</label>
-        
         <select id="gift-q2" class="form-select" name="entry.2047581584">
           <option data-value="知っていた" value="知っていた">知っていた</option>
           <option data-value="聞いたことはあった" value="聞いたことはあった">聞いたことはあった</option>
           <option data-value="知らなかった" value="知らなかった">知らなかった</option>
-
         </select>
       </div>
 
       <div class="mb-3">
-        
         <label class="form-label">例年のイベント（模擬店やキャラクターショー等）と今回のイベントではどちらが良いですか？</label>
-        			
-	
         <select id="gift-q3" class="form-select" name="entry.973971448">
           <option data-value="例年のイベント" value="例年のイベント">例年のイベント</option>
           <option data-value="今回のイベント" value="今回のイベント">今回のイベント</option>
@@ -207,20 +203,17 @@
                   id="gift-q4" 
                   class="form-control" 
                   value="" 
-                  placeholder="回答を入力" >
-        </textarea>
+                  rows="8"
+                  ></textarea>
       </div>
 
-      
 
-      
       <input type="hidden" name="entry.1780406021" value="">
-      
       
       
     </form>
     <button id="gift-form-submit-button" class="btn btn-primary mt-3">Submit</button>
-  <!-- </div> -->
+  
   </template>  
   <!-- ----------------------- -->
   
@@ -301,7 +294,7 @@
         </div>
 
         <div class="alert alert-danger mt-3 gift-form-info" role="alert">
-            <p class="my-0"> クイズに回答してください
+            <p class="my-0"> すべてのクイズに回答したうえで回答を確定してください
             </p>
         </div>
  
@@ -335,10 +328,10 @@
 
         <div class="alert alert-danger mt-3 finish-info"role="alert">
             <p class="my-0">
-                すべてのクイズに回答しました！
+                回答を確定しました．
                 景品の抽選に応募するには必要な情報をフォームに入力してください
             </p>            
-            <button class="btn btn-primary gift-form-button mb-4" href="#gift-form-modal">
+            <button class="btn btn-primary gift-form-button my-3" href="#gift-form-modal">
               景品応募フォーム
             </button>
         </div>
@@ -388,8 +381,8 @@
           <div id="results"></div>  
         </div>
 
-        <div class="justify-content-center mb-3 text-center">
-          <div class="unit-result mt-3 alert alert-primary" role="alert"></div>
+        <div class="mb-3 text-center">
+          <div class="unit-result mt-3 alert alert-primary mt-5" role="alert"></div>
           <button id="quiz-submit-button" type="button" class="btn btn-primary mt-3 rounded-pill">　回答　</button>
         </div>
 

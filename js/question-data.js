@@ -7,6 +7,7 @@ var questions = [
         b: "クリームパン",
         c: "フライパン"
       },
+      answer: "", 
       correctAnswer: "c",
       done: false, 
       result: false
@@ -19,6 +20,7 @@ var questions = [
         b: "クリームパン",
         c: "フライパン"
       },
+      answer: "", 
       correctAnswer: "c",
       done: false, 
       result: false
@@ -31,6 +33,7 @@ var questions = [
         b: "クリームパン",
         c: "フライパン"
       },
+      answer: "", 
       correctAnswer: "c",
       done: false, 
       result: false
@@ -43,6 +46,7 @@ var questions = [
         b: "クリームパン",
         c: "フライパン"
       },
+      answer: "", 
       correctAnswer: "c",
       done: false, 
       result: false
