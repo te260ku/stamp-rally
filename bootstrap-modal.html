@@ -44,7 +44,7 @@
               <!-- ロゴ表示画面 -->
               <div id="title-logo">
                 <img src="./assets/images/stamp.png" class="img-fluid mb-3 w-25">
-                <h1 class="title">Stamp Rally</h1>
+                <h1 class="title">モバイルクイズラリー</h1>
                 <div class="text-center mt-4 animated title-loading">
                   <div class="spinner-border text-white" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -97,13 +97,13 @@
   </template>
   <!--  -->
 
-    
+  <!-- --------------------- -->
   <!-- ナビゲーションテンプレート -->
   <template id="nav-template">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       
-      <a type="button" class="nav-title">
-        <span class="navbar-brand p-2">Stamp Rally</span>
+      <a class="nav-title">
+        <span class="navbar-brand">モバイルクイズラリー</span>
       </a>
       
     </button>
@@ -125,9 +125,10 @@
       </div>
     </nav>
   </template>
-  <!--  -->
+  <!-- --------------------- -->
+  
 
-
+  <!-- ----------------------- -->
   <!-- googleフォームテンプレート -->
   <template id="form-template">
     <form id="quiz-form" 
@@ -144,7 +145,7 @@
       </div>
     </form>
   </template>
-  <!--  -->
+  <!-- ----------------------- -->
 
 
 
@@ -167,10 +168,8 @@
         <input id="gift-email" type="email" class="form-control" name="entry.1045781291">
       </div>
 
-      
       <div class="mb-3">
-        <label class="form-label">フェスティバルへの参加は何回目ですか？</label>
-        
+        <label class="form-label">フェスティバルへの参加は何回目ですか？</label>        
         <select id="gift-q1" class="form-select" name="entry.1062340692">
           <option data-value="初めて" value="初めて">初めて</option>
           <option data-value="2～5回" value="2～5回">2～5回</option>
@@ -208,20 +207,17 @@
                   ></textarea>
       </div>
 
-
+      <!-- 正答数送信用のhiddenフィールド -->
       <input type="hidden" name="entry.1780406021" value="">
-      
-      
     </form>
-    <button id="gift-form-submit-button" class="btn btn-primary mt-3">Submit</button>
-  
+    <button id="gift-form-submit-button" class="btn btn-primary mt-3">送信</button>
   </template>  
   <!-- ----------------------- -->
   
 
 
-
-  <!--  -->
+  <!-- ------------------ -->
+  <!-- オプションテンプレート -->
   <template id="option-template">
     <label class="btn btn-outline-primary mx-2 option my-1 optionButton" style="text-align: center;
                     width: 55%;">
@@ -229,7 +225,7 @@
                     <span></span>
                     </label>
   </template>
-  <!--  -->
+  <!-- ------------------ -->
 
 
 
@@ -237,11 +233,8 @@
   <!-- グローバルナビゲーションバー -->
   <div id="global-nav-area"></div>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <!-- <a id="navbar-title" href="">
-        <span class="navbar-brand p-2">Stamp Rally</span>
-      </a> -->
-      <a type="button" class="nav-title">
-        <span class="navbar-brand p-2">Stamp Rally</span>
+      <a class="nav-title">
+        <span class="navbar-brand">モバイルクイズラリー</span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu2a" aria-controls="navmenu2a" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
