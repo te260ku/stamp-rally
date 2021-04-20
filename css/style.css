@@ -101,3 +101,13 @@ color: white;
 .unit-result {
   margin-top: 50px;
 }
+
+a {
+	border:none;
+	text-decoration:none;
+	background-color:none;
+	cursor:pointer;
+	padding:0;
+	-webkit-appearance: button;
+	*overflow: visible;
+}
