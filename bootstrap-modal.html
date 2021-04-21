@@ -402,7 +402,8 @@
   <!-- ar.js -->
   <!-- ----------------------- -->
   <div style="margin : 0px; overflow: hidden;">
-    <a-scene embedded arjs="debugUIEnabled:false;">
+    <a-scene embedded arjs="debugUIEnabled:false;"
+              vr-mode-ui="enabled: false;">
         <!-- url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/te260ku/stamp-rally/main/assets/markers/q1" -->
         <a-marker 
             id="1" 
@@ -458,7 +459,7 @@
             registerevents 
         >
         </a-marker>
-        <a-entity camera></a-entity>
+        <!-- <a-entity camera></a-entity> -->
     </a-scene>
 
 
