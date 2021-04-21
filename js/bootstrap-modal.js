@@ -1,24 +1,3 @@
-const hide = function(){
-    $('.modal').modal('hide');
-};
-const showModal = function () {
-    $('.modal').modal('show');
-};
-
-$('#exampleModal').on('show.bs.modal', function (event) {
-    // デバッグ用のボタンを押したときにそのidを取得する
-    var id = $(event.relatedTarget).attr('id').substr(-1, 1);
-
-    // detectImageAudio.play();
-    
-    if (!modalON) {
-        buildQuiz(id);
-    }
-});
-
-$('#exampleModal').on('hide.bs.modal', function () {
-});
-
 
 
 var userName = "default";
@@ -95,6 +74,44 @@ var questionNumber;
 var completeNum = 0;
 var modalON = false;
 var correctCount = 0;
+
+
+
+const hide = function(){
+    $('.modal').modal('hide');
+};
+const showModal = function (num, isImage) {
+    $('.modal').modal('show');
+    if (isImage) {
+        create(num);
+    } else {
+        
+    }
+    modalON = true;
+};
+
+const create = function (imageNum) {
+    $('.modal').modal('show');
+    buildQuiz(imageNum);
+    
+  };
+
+$('#exampleModal').on('show.bs.modal', function (event) {
+    // デバッグ用のボタンを押したときにそのidを取得する
+    if ($(event.relatedTarget).attr('id') != null) {
+        var id = $(event.relatedTarget).attr('id').substr(-1, 1);
+        if (!modalON) {
+            buildQuiz(id);
+        }
+    }
+    
+});
+
+$('#exampleModal').on('hide.bs.modal', function () {
+    modalON = false;
+});
+
+
 
 
 // ナビゲーションバー
@@ -636,22 +653,17 @@ $('#name-submit-button').on('click', function () {
 //     loaded = true;
 //   });
 
-$(window).on('load', function() {
-    // loaded = true;
-    // $('#init-container').hide();
-    // if (!initialized) {
-    //     if (loaded) {
-            
-    //     } 
-    // }
-
-});
-
 
 
 $('#reset-storage-button').on('click', function () {
-    localStorage.clear();
-    console.log("reset");
+    var pw = prompt("パスワードを入力してください", "");
+    if (pw == 'admin'){
+        localStorage.clear();
+        console.log("reset");
+        alert('リセットされました．ページをリロードしてください．');
+    } else if(pw != "" && pw != null){
+        alert('パスワードが一致しません');
+	} 
 });
 
 
@@ -732,3 +744,10 @@ $('.stamp-reset-button').on('click', function () {
         
     
 });
+
+
+
+
+
+
+

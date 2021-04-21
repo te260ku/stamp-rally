@@ -6,6 +6,10 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
+  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"> </script>
+  <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> -->
+
   <!-- bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -18,12 +22,14 @@
   <link rel="stylesheet" href="./css/style.css">
 
   <title>stamp-rally</title>
+
+  <script src="./js/tracking.js"></script>
 </head>
+
 
 
 <body class="m-auto w-100" style="margin : 0px; overflow: hidden;">
 
-  <!-- 0202 -->
 
 
   <a id="title-modal-button" href="#title-modal" style="display: none;">
@@ -118,9 +124,7 @@
           <a class="nav-item nav-link gift-form-button" href="#gift-form-modal">
             景品応募フォーム
           </a>
-          <a class="nav-item nav-link" id="switch-image-test-button">
-            show/hide
-          </a>
+          
         </div>
       </div>
     </nav>
@@ -252,7 +256,7 @@
             show/hide
           </a>
           <a class="nav-item nav-link" id="reset-storage-button">
-            reset
+            管理者用
           </a>
         </div>
 
@@ -355,6 +359,12 @@
     <button id="q3" type="button" class="btn btn-primary image-test-button" data-toggle="modal" data-target="#exampleModal">
       画像4
     </button>
+    <button id="q4" type="button" class="btn btn-primary image-test-button" data-toggle="modal" data-target="#exampleModal">
+      画像5
+    </button>
+    <button id="q5" type="button" class="btn btn-primary image-test-button" data-toggle="modal" data-target="#exampleModal">
+      画像6
+    </button>
   </div>
   <!--  -->
  
@@ -377,7 +387,7 @@
           <div id="results"></div>  
         </div>
 
-        <div class="mb-3 text-center">
+        <div class="my-5 text-center">
           <div class="unit-result mt-3 alert alert-primary mt-5" role="alert"></div>
           <button id="quiz-submit-button" type="button" class="btn btn-primary mt-3 rounded-pill">　回答　</button>
         </div>
@@ -391,7 +401,68 @@
 
   <!-- ar.js -->
   <!-- ----------------------- -->
+  <div style="margin : 0px; overflow: hidden;">
+    <a-scene embedded arjs="debugUIEnabled:false;">
+        <!-- url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/te260ku/stamp-rally/main/assets/markers/q1" -->
+        <a-marker 
+            id="1" 
+            preset="custom" 
+            type="pattern" 
+            
+            url="./assets/markers/q1"
+            registerevents 
+        >
+        </a-marker>
 
+        <a-marker 
+            id="2" 
+            preset="custom" 
+            type="pattern" 
+            url="./assets/markers/q2"
+            registerevents 
+        >
+        </a-marker>
+
+        <a-marker 
+            id="3" 
+            preset="custom" 
+            type="pattern" 
+            url="./assets/markers/q3"
+            registerevents 
+        >
+        </a-marker>
+
+        <a-marker 
+            id="4" 
+            preset="custom" 
+            type="pattern" 
+            url="./assets/markers/q4"
+            registerevents 
+        >
+        </a-marker>
+
+        <a-marker 
+            id="5" 
+            preset="custom" 
+            type="pattern" 
+            url="./assets/markers/q5"
+            registerevents 
+        >
+        </a-marker>
+
+        <a-marker 
+            id="6" 
+            preset="custom" 
+            type="pattern" 
+            url="./assets/markers/q6"
+            registerevents 
+        >
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+
+
+    </div>
   <!-- ----------------------- -->
   
   
