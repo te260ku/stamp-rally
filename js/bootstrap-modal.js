@@ -241,16 +241,17 @@ function sendGiftFormData() {
     var q3 = $('#gift-q3').val();
     var q4 = $('#gift-q4').val();
 
+    
     $.ajax({
-    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLScBVMt357SMiS37tOAl9bGR7J2formC1e6U4pFZ6zvIoAuorQ/formResponse", 
+    url: "https://docs.google.com/forms/u/3/d/e/1FAIpQLSd1uIKLOtF1YlCEPnXbjrli2iVEhXaiy1gVwJ3gmXQ5mxVqCQ/formResponse", 
     data: {
-        "entry.2005620554": name, 
-        "entry.1045781291": email, 
-        "entry.1062340692": q1, 
-        "entry.2047581584": q2, 
-        "entry.973971448": q3, 
-        "entry.1716794980": q4, 
-        "entry.1780406021": correctCount, 
+        "entry.1557222957": name, 
+        "entry.1305270304": email, 
+        "entry.204288091": q1, 
+        "entry.1793261130": q2, 
+        "entry.488462029": q3, 
+        "entry.65030031": q4, 
+        "entry.935333881": correctCount, 
     },
     type: "POST",
     dataType: "xml",
@@ -259,7 +260,7 @@ function sendGiftFormData() {
             window.location.href = './thanks.html';
         },
         200: function() {
-            alert("errorMsg");
+            alert("回答を送信できませんでした");
         }
     }
 });
