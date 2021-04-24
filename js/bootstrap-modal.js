@@ -8,6 +8,7 @@ var userInfo = {
     init : false, 
     name : userName, 
     complete: false, 
+    completeGiftForm: false, 
 };
 
 
@@ -257,6 +258,8 @@ function sendGiftFormData() {
     dataType: "xml",
     statusCode: {
         0: function() {
+            userInfo.completeGiftForm = true;
+            recordLocalStorage("userInfo", userInfo);
             window.location.href = './thanks.html';
         },
         200: function() {
@@ -267,7 +270,6 @@ function sendGiftFormData() {
 };
 $('#gift-form-submit-button').on('click', function () {
     sendGiftFormData();
-    
 });
 
 
@@ -669,9 +671,9 @@ $('#reset-storage-button').on('click', function () {
 
 
 
-// 初回のみ実行
+
 if (!localStorage.getItem("userInfo")) {
-    
+    // 初回のみ実行    
     localStorage.clear();
     recordLocalStorage("userInfo", userInfo);
     recordLocalStorage("questions", questions);
@@ -679,6 +681,7 @@ if (!localStorage.getItem("userInfo")) {
     titleAnimation();
     
 } else {
+    // 2回目以降実行
     userInfo = readLocalStorage("userInfo");
     userName = userInfo.name;
     questions = readLocalStorage("questions");
@@ -686,6 +689,9 @@ if (!localStorage.getItem("userInfo")) {
     completeCount = getCompleteCount();
     if (readLocalStorage("userInfo").complete) {
         finish();
+    }
+    if (readLocalStorage("userInfo").completeGiftForm) {
+        $('#gift-form-submit-button').addClass('disabled');
     }
     
 };
